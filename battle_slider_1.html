@@ -1,0 +1,56 @@
+<div class="slider-section">    
+    <div class="battle-slider-container">
+        <div class="battle-slider">
+            <div class="slide fade">
+                <div class="slide-number">1/5</div>
+                <img src="day1_1.png" alt="Battle scene from Day 2">
+                <div class="fullscreen-button" onclick="openFullscreen('day1_1.png')">⛶</div>
+            </div>
+            
+            <div class="slide fade">
+                <div class="slide-number">2/5</div>
+                <img src="day1_2.png" alt="Bhima's counter attack">
+                <div class="fullscreen-button" onclick="openFullscreen('day1_2.png')">⛶</div>
+            </div>
+            
+            <div class="slide fade">
+                <div class="slide-number">3/5</div>
+                <img src="day1_3.png" alt="Arjuna's archery">
+                <div class="fullscreen-button" onclick="openFullscreen('day1_3.png')">⛶</div>
+            </div>
+            
+            <div class="slide fade">
+                <div class="slide-number">4/5</div>
+                <img src="day1_4.png" alt="Kaurava warriors">
+                <div class="fullscreen-button" onclick="openFullscreen('day1_4.png')">⛶</div>
+            </div>
+            
+            <div class="slide fade">
+                <div class="slide-number">5/5</div>
+                <img src="day1_5.png" alt="Day 2 battlefield">
+                <div class="fullscreen-button" onclick="openFullscreen('day1_5.png')">⛶</div>
+            </div>
+            
+            <!-- Navigation arrows -->
+            <a class="prev" onclick="changeSlide(-1)">&#10094;</a>
+            <a class="next" onclick="changeSlide(1)">&#10095;</a>
+        </div>
+        
+        <!-- Navigation dots -->
+        <div class="dots-container">
+            <span class="dot" onclick="currentSlide(1)"></span>
+            <span class="dot" onclick="currentSlide(2)"></span>
+            <span class="dot" onclick="currentSlide(3)"></span>
+            <span class="dot" onclick="currentSlide(4)"></span>
+            <span class="dot" onclick="currentSlide(5)"></span>
+        </div>
+    </div>
+</div>
+
+<!-- Fullscreen overlay -->
+<div id="fullscreen-overlay" class="fullscreen-overlay">
+    <span class="close-fullscreen" onclick="closeFullscreen()">&times;</span>
+    <div class="fullscreen-content">
+        <img id="fullscreen-image" src="">
+    </div>
+</div>

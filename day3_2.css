@@ -1,0 +1,720 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap');
+
+.combat-dashboard {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: 'Cinzel', serif;
+    color: #f5e6cc;
+    background: linear-gradient(135deg, rgba(46, 26, 20, 0.9), rgba(102, 36, 23, 0.9));
+    border-radius: 8px;
+    border: 2px solid rgba(213, 162, 111, 0.7);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+}
+
+.dashboard-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.header-icon {
+    font-size: 2rem;
+    margin-right: 15px;
+    color: #d5a26f;
+}
+
+.dashboard-header h2 {
+    color: #d5a26f;
+    font-weight: 700;
+    font-size: 1.8rem;
+    margin: 0;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+/* Toggle Controls */
+.toggle-controls {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.toggle-btn {
+    background: linear-gradient(135deg, rgba(46, 26, 20, 0.8), rgba(102, 36, 23, 0.6));
+    border: 1px solid rgba(213, 162, 111, 0.5);
+    border-radius: 5px;
+    padding: 8px 15px;
+    font-family: 'Cinzel', serif;
+    font-size: 0.9rem;
+    color: #d5a26f;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.toggle-btn:hover {
+    background: linear-gradient(135deg, rgba(102, 36, 23, 0.6), rgba(46, 26, 20, 0.8));
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.toggle-btn.active {
+    background: linear-gradient(135deg, rgba(213, 162, 111, 0.2), rgba(213, 162, 111, 0.1));
+    border: 1px solid rgba(213, 162, 111, 0.8);
+    box-shadow: 0 0 8px rgba(213, 162, 111, 0.4);
+}
+
+.toggle-btn .icon {
+    font-size: 1.2rem;
+}
+
+/* Dashboard Views */
+.dashboard-view {
+    display: none;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+.dashboard-view.active {
+    display: block;
+    opacity: 1;
+    animation: fadeInUp 0.5s forwards;
+}
+
+/* Chart View */
+/* Ensure the chart container has proper dimensions */
+.chart-container {
+    height: 300px;
+    min-height: 300px;
+    position: relative;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 15px;
+}
+
+.chart-legend {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    background: rgba(46, 26, 20, 0.7);
+    padding: 5px 12px;
+    border-radius: 20px;
+    border: 1px solid rgba(213, 162, 111, 0.3);
+}
+
+.legend-icon {
+    font-size: 1.2rem;
+}
+
+.legend-label {
+    font-size: 0.9rem;
+    color: #f5e6cc;
+}
+
+/* Comparison View */
+.comparison-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 15px;
+}
+
+.comparison-item {
+    background: linear-gradient(135deg, rgba(46, 26, 20, 0.7), rgba(102, 36, 23, 0.5));
+    border-radius: 8px;
+    padding: 15px;
+    text-align: center;
+    border: 1px solid rgba(213, 162, 111, 0.4);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease;
+}
+
+.comparison-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+.weapon-icon {
+    font-size: 2rem;
+    margin-bottom: 5px;
+    color: #d5a26f;
+}
+
+.weapon-name {
+    font-size: 1.1rem;
+    color: #d5a26f;
+    margin-bottom: 10px;
+}
+
+.weapon-bar {
+    height: 15px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: 10px;
+}
+
+.weapon-progress {
+    height: 100%;
+    background: linear-gradient(90deg, #d5a26f, rgba(213, 162, 111, 0.5));
+    border-radius: 10px;
+    width: 0;
+    transition: width 1.5s ease;
+}
+
+.weapon-count {
+    font-size: 1.2rem;
+    color: #f5e6cc;
+    font-weight: 600;
+}
+
+/* Impact View */
+.impact-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+}
+
+.impact-card {
+    background: linear-gradient(135deg, rgba(46, 26, 20, 0.7), rgba(102, 36, 23, 0.5));
+    border-radius: 8px;
+    padding: 15px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid rgba(213, 162, 111, 0.4);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+}
+
+.impact-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+}
+
+.impact-icon {
+    font-size: 2.2rem;
+    margin-bottom: 10px;
+    color: #d5a26f;
+}
+
+.impact-title {
+    color: #d5a26f;
+    font-size: 1.1rem;
+    margin-bottom: 5px;
+}
+
+.impact-count {
+    font-size: 1.3rem;
+    color: #f5e6cc;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.impact-detail {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 0.95rem;
+    color: #f5e6cc;
+}
+
+/* Footer */
+.dashboard-footer {
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px solid rgba(213, 162, 111, 0.3);
+}
+
+.insight-box {
+    background: linear-gradient(135deg, rgba(213, 162, 111, 0.2), rgba(213, 162, 111, 0.05));
+    border: 1px solid rgba(213, 162, 111, 0.4);
+    border-radius: 8px;
+    padding: 12px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.insight-icon {
+    font-size: 1.5rem;
+    color: #d5a26f;
+}
+
+.insight-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1rem;
+    color: #f5e6cc;
+    line-height: 1.5;
+}
+
+/* Animations */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Make sure these are in your CSS file */
+
+/* Radar chart container */
+.radar-container {
+    height: 350px;
+    min-height: 300px;
+    position: relative;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    padding: 15px;
+    margin-bottom: 15px;
+}
+
+/* Legend text */
+.legend-text {
+    color: #f5e6cc;
+    font-size: 0.9rem;
+}
+
+/* Add these styles at the appropriate location in your CSS file */
+
+/* Advanced Analytics Sections */
+.advanced-analytics {
+    margin-top: 25px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(213, 162, 111, 0.3);
+    animation: fadeIn 1s forwards;
+}
+
+.analytics-title {
+    text-align: center;
+    color: #d5a26f;
+    font-size: 1.4rem;
+    margin-bottom: 20px;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+/* Heatmap Styles */
+.matrix-container {
+    overflow-x: auto;
+    margin-bottom: 15px;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    padding: 15px;
+}
+
+.heatmap-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 3px;
+    color: #f5e6cc;
+}
+
+.heatmap-table th, 
+.heatmap-table td {
+    padding: 10px;
+    text-align: center;
+    border-radius: 4px;
+    font-size: 0.9rem;
+}
+
+.heatmap-table th {
+    background: rgba(46, 26, 20, 0.8);
+    color: #d5a26f;
+    font-weight: bold;
+}
+
+.row-header {
+    background: rgba(46, 26, 20, 0.8);
+    color: #d5a26f;
+    font-weight: bold;
+}
+
+.heatmap-cell {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.heatmap-cell:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    cursor: pointer;
+}
+
+.table-icon {
+    font-size: 1.2rem;
+    margin-bottom: 5px;
+    display: block;
+}
+
+.heatmap-legend {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.heatmap-label {
+    font-size: 0.9rem;
+    color: #d5a26f;
+}
+
+.heatmap-gradient {
+    width: 150px;
+    height: 15px;
+    background: linear-gradient(90deg, 
+        rgba(255, 233, 191, 0.7), 
+        rgba(213, 162, 111, 0.7), 
+        rgba(156, 85, 56, 0.8));
+    border-radius: 10px;
+}
+
+.heatmap-labels {
+    display: flex;
+    justify-content: space-between;
+    width: 150px;
+}
+
+.heatmap-labels span {
+    font-size: 0.8rem;
+    color: #f5e6cc;
+}
+
+/* Additional animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+/* Responsive adjustments */
+@media screen and (max-width: 768px) {
+    .impact-cards,
+    .comparison-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .chart-container {
+        height: 250px;
+    }
+    
+    .toggle-controls {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .radar-container {
+        height: 250px;
+    }
+    
+    .matrix-container {
+        padding: 10px 5px;
+    }
+    
+    .heatmap-table th, 
+    .heatmap-table td {
+        padding: 8px 5px;
+        font-size: 0.8rem;
+    }
+}
+
+/* New styles for enhanced data storytelling */
+
+.narrative-intro {
+    text-align: center;
+    margin-bottom: 25px;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: #f5e6cc;
+    background: rgba(46, 26, 20, 0.4);
+    padding: 15px;
+    border-radius: 8px;
+    border-left: 3px solid rgba(213, 162, 111, 0.7);
+}
+
+.highlight {
+    color: #d5a26f;
+    font-weight: bold;
+}
+
+/* Weapon Story */
+.weapon-story-trigger {
+    margin-top: 10px;
+    font-size: 0.85rem;
+    color: rgba(213, 162, 111, 0.8);
+    border-bottom: 1px dashed rgba(213, 162, 111, 0.5);
+    display: inline-block;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.weapon-story-trigger:hover {
+    color: #d5a26f;
+}
+
+.comparison-item {
+    position: relative;
+    overflow: hidden;
+}
+
+.weapon-story {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(46, 26, 20, 0.95), rgba(102, 36, 23, 0.95));
+    padding: 20px 15px;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+    pointer-events: none;
+    z-index: 5;
+}
+
+.weapon-story.active {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: all;
+}
+
+.story-close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    color: #d5a26f;
+    font-size: 1.2rem;
+    cursor: pointer;
+}
+
+.weapon-story h4 {
+    color: #d5a26f;
+    margin: 0 0 12px 0;
+    font-size: 1.1rem;
+}
+
+.weapon-story p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    color: #f5e6cc;
+    margin: 0 0 15px;
+    text-align: center;
+}
+
+.story-stat {
+    background: rgba(213, 162, 111, 0.15);
+    border: 1px solid rgba(213, 162, 111, 0.3);
+    border-radius: 6px;
+    padding: 8px 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 80%;
+}
+
+.stat-label {
+    color: #d5a26f;
+    font-size: 0.9rem;
+}
+
+.stat-value {
+    color: #f5e6cc;
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+/* Analytics Section Enhancements */
+.analytics-intro {
+    text-align: center;
+    margin-bottom: 20px;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1rem;
+    color: #f5e6cc;
+}
+
+.analytics-insight {
+    background: linear-gradient(135deg, rgba(213, 162, 111, 0.2), rgba(213, 162, 111, 0.05));
+    border: 1px solid rgba(213, 162, 111, 0.4);
+    border-radius: 8px;
+    padding: 15px;
+    margin: 20px 0;
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+}
+
+.insight-icon {
+    font-size: 1.8rem;
+    color: #d5a26f;
+    margin-top: 5px;
+}
+
+.insight-content h4 {
+    color: #d5a26f;
+    margin: 0 0 10px 0;
+    font-size: 1.2rem;
+}
+
+.insight-content p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #f5e6cc;
+    margin: 0 0 12px;
+}
+
+.insight-data {
+    display: flex;
+    gap: 15px;
+    margin-top: 10px;
+}
+
+.data-point {
+    background: rgba(46, 26, 20, 0.6);
+    border-radius: 6px;
+    padding: 8px 12px;
+    text-align: center;
+    flex: 1;
+}
+
+.data-value {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #d5a26f;
+}
+
+.data-label {
+    font-size: 0.85rem;
+    color: #f5e6cc;
+    margin-top: 5px;
+}
+
+/* Battle Impact Enhancements */
+.battle-metrics {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    margin-bottom: 25px;
+}
+
+.metric-column {
+    background: linear-gradient(135deg, rgba(46, 26, 20, 0.7), rgba(102, 36, 23, 0.5));
+    border: 1px solid rgba(213, 162, 111, 0.4);
+    border-radius: 8px;
+    padding: 15px 10px;
+    text-align: center;
+}
+
+.metric-number {
+    font-size: 1.6rem;
+    color: #d5a26f;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.metric-label {
+    font-size: 0.85rem;
+    color: #f5e6cc;
+}
+
+.impact-meter {
+    height: 6px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    overflow: hidden;
+    margin: 10px 0;
+}
+
+.impact-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #d5a26f, rgba(213, 162, 111, 0.6));
+    border-radius: 10px;
+}
+
+.impact-note {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 0.9rem;
+    color: #d5a26f;
+    margin-top: 8px;
+}
+
+.matrix-insights {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.insight-column {
+    background: rgba(46, 26, 20, 0.5);
+    border: 1px solid rgba(213, 162, 111, 0.3);
+    border-radius: 8px;
+    padding: 15px;
+}
+
+.insight-column h4 {
+    color: #d5a26f;
+    margin: 0 0 10px 0;
+    font-size: 1.1rem;
+}
+
+.insight-column p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    color: #f5e6cc;
+    margin: 0;
+}
+
+/* Responsive adjustments */
+@media screen and (max-width: 768px) {
+    .battle-metrics {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .matrix-insights {
+        grid-template-columns: 1fr;
+    }
+    
+    .insight-data {
+        flex-direction: column;
+        gap: 10px;
+    }
+}

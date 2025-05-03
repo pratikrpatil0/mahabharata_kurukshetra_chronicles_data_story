@@ -1,0 +1,1144 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+/* Core Dashboard Styles */
+.war-dashboard {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1.5rem;
+    font-family: 'Cinzel', serif;
+    color: #f5e6cc;
+    background: linear-gradient(135deg, rgba(46, 26, 20, 0.8), rgba(102, 36, 23, 0.8));
+    border-radius: 10px;
+    border: 2px solid rgba(213, 162, 111, 0.7);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.dashboard-title {
+    text-align: center;
+    font-size: 2.2rem;
+    color: #d5a26f;
+    margin-bottom: 1.5rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+}
+
+/* Toggle Navigation */
+.toggle-nav {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 2rem;
+}
+
+.toggle-btn {
+    padding: 0.8rem 1.2rem;
+    background: linear-gradient(135deg, rgba(46, 26, 20, 0.9), rgba(102, 36, 23, 0.8));
+    color: #d5a26f;
+    border: 1px solid rgba(213, 162, 111, 0.6);
+    border-radius: 5px;
+    font-family: 'Cinzel', serif;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.toggle-btn:hover {
+    background: linear-gradient(135deg, rgba(102, 36, 23, 0.8), rgba(46, 26, 20, 0.9));
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+}
+
+.toggle-btn.active {
+    background: linear-gradient(135deg, rgba(213, 162, 111, 0.3), rgba(213, 162, 111, 0.1));
+    border: 1px solid rgba(213, 162, 111, 0.8);
+    box-shadow: 0 2px 10px rgba(213, 162, 111, 0.3);
+}
+
+.toggle-btn-icon {
+    font-size: 1.3rem;
+}
+
+/* Formations summary box */
+.formations-summary {
+    background: linear-gradient(135deg, rgba(46, 26, 20, 0.7), rgba(102, 36, 23, 0.6));
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    border: 1px solid rgba(213, 162, 111, 0.6);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.formations-title {
+    color: #d5a26f;
+    font-size: 1.6rem;
+    text-align: center;
+    margin-bottom: 1.5rem;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+.formations-content {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.formation-side {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.formation-name {
+    font-size: 1.2rem;
+    color: #d5a26f;
+    margin-bottom: 0.5rem;
+    text-align: center;
+}
+
+.formation-icon {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+.formation-illustration {
+    width: 100%;
+    height: 180px;
+    margin: 1rem 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.formation-commanders {
+    text-align: center;
+    margin-bottom: 0.5rem;
+    color: #f5e6cc;
+}
+
+.formation-strategy {
+    font-style: italic;
+    text-align: center;
+    padding: 0.5rem;
+    background: rgba(213, 162, 111, 0.1);
+    border-radius: 4px;
+    font-family: 'Cormorant Garamond', serif;
+    color: #f5e6cc;
+}
+
+/* Data Sections */
+.data-section {
+    display: none;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+    background: linear-gradient(135deg, rgba(46, 26, 20, 0.6), rgba(102, 36, 23, 0.6));
+    border-radius: 8px;
+    padding: 1.5rem;
+    border: 1px solid rgba(213, 162, 111, 0.4);
+    margin-bottom: 1rem;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.data-section.active {
+    display: block;
+    opacity: 1;
+    animation: fadeInScale 0.5s forwards;
+}
+
+/* Overview Cards */
+.overview-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.overview-card {
+    background: linear-gradient(135deg, rgba(46, 26, 20, 0.7), rgba(102, 36, 23, 0.6));
+    border-radius: 8px;
+    padding: $2rem;
+    text-align: center;
+    border: 1px solid rgba(213, 162, 111, 0.4);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease;
+    padding: 1.5rem;
+}
+
+.overview-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+}
+
+.overview-icon {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+    color: #d5a26f;
+}
+
+.overview-value {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #f5e6cc;
+    margin: 0.5rem 0;
+}
+
+.overview-label {
+    font-size: 1rem;
+    color: #d5a26f;
+}
+
+/* Formation Comparison */
+.formation-display {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+    margin-bottom: 1.5rem;
+}
+
+.formation-card {
+    background: linear-gradient(135deg, rgba(46, 26, 20, 0.7), rgba(102, 36, 23, 0.6));
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid rgba(213, 162, 111, 0.4);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.formation-header {
+    background: rgba(46, 26, 20, 0.8);
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    border-bottom: 1px solid rgba(213, 162, 111, 0.3);
+}
+
+.formation-icon {
+    font-size: 1.5rem;
+    color: #d5a26f;
+}
+
+.formation-title {
+    font-size: 1.3rem;
+    color: #d5a26f;
+    margin: 0;
+}
+
+.formation-content {
+    padding: 1.5rem;
+}
+
+.formation-name {
+    font-size: 1.5rem;
+    color: #f5e6cc;
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.formation-image {
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.formation-svg {
+    width: 100%;
+    height: 100%;
+}
+
+.formation-desc {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    color: #f5e6cc;
+    text-align: center;
+}
+
+.commander-list {
+    margin-top: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.commander-badge {
+    background: rgba(213, 162, 111, 0.2);
+    border: 1px solid rgba(213, 162, 111, 0.5);
+    border-radius: 20px;
+    padding: 0.3rem 0.8rem;
+    font-size: 0.9rem;
+    color: #f5e6cc;
+}
+
+/* Casualties Analysis */
+.casualties-chart-container {
+    height: 350px;
+    margin-bottom: 2rem;
+    position: relative;
+}
+
+.casualties-details {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+}
+
+.casualties-card {
+    background: linear-gradient(135deg, rgba(46, 26, 20, 0.7), rgba(102, 36, 23, 0.6));
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid rgba(213, 162, 111, 0.4);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    padding: 0;
+}
+
+.casualties-header {
+    padding: 1rem;
+    text-align: center;
+    border-bottom: 1px solid rgba(213, 162, 111, 0.3);
+}
+
+.pandava-header {
+    background: linear-gradient(90deg, rgba(46, 26, 20, 0.8), rgba(75, 156, 211, 0.3));
+}
+
+.kaurava-header {
+    background: linear-gradient(90deg, rgba(46, 26, 20, 0.8), rgba(201, 76, 76, 0.3));
+}
+
+.casualties-header h3 {
+    margin: 0;
+    color: #d5a26f;
+    font-size: 1.3rem;
+}
+
+.casualties-body {
+    padding: 1.5rem;
+}
+
+.casualties-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+}
+
+.casualty-type {
+    text-align: center;
+}
+
+.casualty-icon {
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+    color: #d5a26f;
+}
+
+.casualty-value {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #f5e6cc;
+    margin: 0.3rem 0;
+}
+
+.casualty-label {
+    font-size: 0.9rem;
+    color: #d5a26f;
+}
+
+/* Battle Map */
+.battle-map-container {
+    height: 500px;
+    position: relative;
+    border: 2px solid rgba(213, 162, 111, 0.5);
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 2rem;
+}
+
+.battle-map {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(rgba(46, 26, 20, 0.4), rgba(46, 26, 20, 0.6));
+    background-size: cover;
+    background-position: center;
+    position: relative;
+}
+
+.intensity-zone {
+    position: absolute;
+    border-radius: 50%;
+}
+
+.intensity-zone-high {
+    background: radial-gradient(circle, rgba(201, 76, 76, 0.8) 0%, rgba(201, 76, 76, 0) 70%);
+}
+
+.intensity-zone-medium {
+    background: radial-gradient(circle, rgba(201, 76, 76, 0.6) 0%, rgba(201, 76, 76, 0) 70%);
+}
+
+.intensity-zone-low {
+    background: radial-gradient(circle, rgba(201, 76, 76, 0.4) 0%, rgba(201, 76, 76, 0) 70%);
+}
+
+.army-position {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+    z-index: 10;
+    font-size: 1.3rem;
+}
+
+.position-pandava {
+    background: rgba(75, 156, 211, 0.8);
+    border: 2px solid rgba(75, 156, 211, 1);
+}
+
+.position-kaurava {
+    background: rgba(201, 76, 76, 0.8);
+    border: 2px solid rgba(201, 76, 76, 1);
+}
+
+.commander-position {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: rgba(213, 162, 111, 0.9);
+    border: 2px solid rgba(213, 162, 111, 1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 10px rgba(213, 162, 111, 0.7);
+    z-index: 15;
+    font-size: 1rem;
+}
+
+.position-label {
+    position: absolute;
+    background: rgba(46, 26, 20, 0.8);
+    color: #d5a26f;
+    padding: 0.3rem 0.7rem;
+    border-radius: 3px;
+    font-size: 0.9rem;
+    white-space: nowrap;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+    z-index: 15;
+}
+
+.map-legend {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    background: rgba(46, 26, 20, 0.8);
+    border: 1px solid rgba(213, 162, 111, 0.5);
+    border-radius: 5px;
+    padding: 0.8rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.legend-icon {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+}
+
+.legend-text {
+    font-size: 0.9rem;
+    color: #f5e6cc;
+}
+
+/* Animations */
+@keyframes fadeInScale {
+    from {
+        opacity: 0;
+        transform: scale(0.98);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes pulsate {
+    0%, 100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.05);
+        opacity: 0.8;
+    }
+}
+
+/* Responsive */
+@media screen and (max-width: 900px) {
+    .formations-content {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Casualties Total Box Styles */
+.casualties-total-box {
+    background: linear-gradient(135deg, rgba(46, 26, 20, 0.7), rgba(102, 36, 23, 0.6));
+    border-radius: 8px;
+    padding: 1.5rem;
+    text-align: center;
+    border: 1px solid rgba(213, 162, 111, 0.4);
+    margin-bottom: 1.5rem;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.casualties-total-icon {
+    font-size: 2.5rem;
+    color: #d5a26f;
+    margin-bottom: 0.5rem;
+}
+
+.casualties-total-title {
+    font-size: 1.4rem;
+    color: #f5e6cc;
+    margin-bottom: 0.5rem;
+}
+
+.casualties-total-value {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #d5a26f;
+    margin-bottom: 1.5rem;
+}
+
+/* Side Casualties Container and Bars */
+.side-casualties-container {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+    margin-top: 1.5rem;
+}
+
+.side-casualties {
+    width: 45%;
+    text-align: center;
+}
+
+.side-casualties-title {
+    font-size: 1.2rem;
+    color: #d5a26f;
+    margin-bottom: 0.3rem;
+}
+
+.side-casualties-value {
+    font-size: 1.6rem;
+    color: #f5e6cc;
+    font-weight: bold;
+    margin-bottom: 0.8rem;
+}
+
+.side-casualties-bar-container {
+    height: 24px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 12px;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(213, 162, 111, 0.3);
+}
+
+.side-casualties-bar {
+    height: 100%;
+    width: 0%; /* Start at 0 - will be animated by JS */
+    transition: width 1.5s ease-out;
+    border-radius: 12px;
+}
+
+.pandava-bar {
+    background: linear-gradient(to right, rgba(75, 156, 211, 0.3), rgba(75, 156, 211, 0.7));
+}
+
+.kaurava-bar {
+    background: linear-gradient(to right, rgba(201, 76, 76, 0.3), rgba(201, 76, 76, 0.7));
+}
+
+.side-casualties-percent {
+    position: absolute;
+    right: 10px;
+    top: 0;
+    line-height: 24px;
+    color: #f5e6cc;
+    font-weight: bold;
+}
+
+/* Fixed Donut Chart Styles */
+.casualties-donut-container {
+    position: relative;
+    width: 100%;
+    max-width: 200px;
+    margin: 0 auto;
+    padding-bottom: 20px;
+}
+
+.casualties-donut {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    overflow: hidden;
+    background: #1e100c;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
+}
+
+.donut-segment {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+
+/* Kaurava segment (64%) */
+.kaurava-segment {
+    background-color: rgba(201, 76, 76, 0.8);
+    clip-path: polygon(50% 50%, 100% 0, 100% 100%, 0 100%, 0 0);
+}
+
+/* Pandava segment (36%) */
+.pandava-segment {
+    background-color: rgba(75, 156, 211, 0.8);
+    clip-path: polygon(50% 50%, 0 0, 100% 0);
+    transform: rotate(126deg);
+}
+
+/* Center hole */
+.donut-hole {
+    position: absolute;
+    width: 60%;
+    height: 60%;
+    background: linear-gradient(135deg, rgba(46, 26, 20, 0.9), rgba(102, 36, 23, 0.8));
+    border-radius: 50%;
+    top: 20%;
+    left: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid rgba(213, 162, 111, 0.3);
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.donut-label {
+    color: #d5a26f;
+    font-size: 1.4rem;
+    font-weight: bold;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+}
+
+/* Legend Styles */
+.donut-legend {
+    margin-top: 1rem;
+    text-align: left;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.legend-color {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    margin-right: 0.5rem;
+}
+
+.pandava-color {
+    background: rgba(75, 156, 211, 0.7);
+}
+
+.kaurava-color {
+    background: rgba(201, 76, 76, 0.7);
+}
+
+.legend-title {
+    font-weight: bold;
+    color: #d5a26f;
+}
+
+.legend-value {
+    color: #f5e6cc;
+}
+
+/* Responsive Adjustments */
+@media screen and (max-width: 600px) {
+    .casualties-donut-container {
+        max-width: 150px;
+    }
+
+    .donut-label {
+        font-size: 1rem;
+    }
+
+    .legend-title {
+        font-size: 0.9rem;
+    }
+
+    .legend-value {
+        font-size: 0.8rem;
+    }
+}
+</style>
+</head>
+<body>
+
+<div class="war-dashboard">
+    <h1 class="dashboard-title">Day 1: The War Begins - Battlefield Analysis</h1>
+    
+    <!-- Army Formations Summary Box -->
+    <div class="formations-summary">
+        <h2 class="formations-title">⚔️ Army Formations & Commanders</h2>
+        
+        <div class="formations-content">
+            <!-- Pandava Formation -->
+            <div class="formation-side">
+                <div class="formation-name">Pandavas: Krauncha Vyuha <span class="formation-icon">🦢</span></div>
+                
+                <div class="formation-illustration">
+                    <svg viewBox="0 0 300 180" width="100%" height="100%">
+                        <!-- Heron Formation for Pandavas -->
+                        <path d="M150,40 C100,80 100,160 150,200 C200,160 200,80 150,40" stroke="#4B9CD3" stroke-width="3" fill="none" />
+                        
+                        <!-- Wings -->
+                        <path d="M150,120 C120,100 80,110 60,140" stroke="#4B9CD3" stroke-width="3" fill="none" />
+                        <path d="M150,120 C180,100 220,110 240,140" stroke="#4B9CD3" stroke-width="3" fill="none" />
+                        
+                        <!-- Commander position (Dhrishtadyumna) -->
+                        <circle cx="150" cy="40" r="6" fill="#4B9CD3" stroke="#d5a26f" stroke-width="1"/>
+                        <text x="150" y="40" text-anchor="middle" dominant-baseline="middle" fill="#FFF" font-size="8" font-weight="bold">D</text>
+                        
+                        <!-- Soldier dots -->
+                        <circle cx="120" cy="80" r="3" fill="#4B9CD3" />
+                        <circle cx="180" cy="80" r="3" fill="#4B9CD3" />
+                        <circle cx="130" cy="120" r="3" fill="#4B9CD3" />
+                        <circle cx="170" cy="120" r="3" fill="#4B9CD3" />
+                        <circle cx="100" cy="140" r="3" fill="#4B9CD3" />
+                        <circle cx="200" cy="140" r="3" fill="#4B9CD3" />
+                        
+                        <!-- Labels -->
+                        <text x="150" y="25" text-anchor="middle" fill="#d5a26f" font-size="10">Dhrishtadyumna</text>
+                    </svg>
+                </div>
+                
+                <div class="formation-commanders">
+                    <strong>Commander:</strong> Dhrishtadyumna
+                </div>
+                
+                <div class="formation-strategy">
+                    The Krauncha (Heron) formation provided a sharp, piercing offensive like a bird's beak
+                </div>
+            </div>
+            
+            <!-- Kaurava Formation -->
+            <div class="formation-side">
+                <div class="formation-name">Kauravas: Vajra Vyuha <span class="formation-icon">💎</span></div>
+                
+                <div class="formation-illustration">
+                    <svg viewBox="0 0 300 180" width="100%" height="100%">
+                        <!-- Diamond Formation -->
+                        <path d="M150,40 L100,100 L150,160 L200,100 Z" stroke="#C94C4C" stroke-width="3" fill="none" />
+                        
+                        <!-- Soldier dots -->
+                        <circle cx="150" cy="40" r="6" fill="#C94C4C" stroke="#d5a26f" stroke-width="1"/>
+                        <text x="150" y="40" text-anchor="middle" dominant-baseline="middle" fill="#FFF" font-size="8" font-weight="bold">B</text>
+                        
+                        <circle cx="100" cy="100" r="3" fill="#C94C4C" />
+                        <circle cx="150" cy="160" r="3" fill="#C94C4C" />
+                        <circle cx="200" cy="100" r="3" fill="#C94C4C" />
+                        
+                        <circle cx="125" cy="70" r="3" fill="#C94C4C" />
+                        <circle cx="175" cy="70" r="3" fill="#C94C4C" />
+                        <circle cx="125" cy="130" r="3" fill="#C94C4C" />
+                        <circle cx="175" cy="130" r="3" fill="#C94C4C" />
+                        
+                        <!-- Labels -->
+                        <text x="150" y="25" text-anchor="middle" fill="#d5a26f" font-size="10">Bhishma</text>
+                    </svg>
+                </div>
+                
+                <div class="formation-commanders">
+                    <strong>Commander:</strong> Bhishma Pitamaha
+                </div>
+                
+                <div class="formation-strategy">
+                    The Vajra (Diamond) formation provided an unbreakable, powerful defensive resistance
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Navigation Tabs -->
+    <div class="toggle-nav">
+        <button class="toggle-btn active" data-target="overview">
+            <span class="toggle-btn-icon">📊</span> Overview
+        </button>
+        <button class="toggle-btn" data-target="formations">
+            <span class="toggle-btn-icon">⚔️</span> Formations
+        </button>
+        <button class="toggle-btn" data-target="casualties">
+            <span class="toggle-btn-icon">☠️</span> Casualties
+        </button>
+    </div>
+    
+    <!-- Update the Overview Section -->
+    <div id="overview" class="data-section active">
+        <div class="overview-cards">
+            <div class="overview-card">
+                <div class="overview-icon">📅</div>
+                <div class="overview-value">Day 1</div>
+                <div class="overview-label">of the 18-day war</div>
+            </div>
+            
+            <div class="overview-card">
+                <div class="overview-icon">📍</div>
+                <div class="overview-value">Kurukshetra</div>
+                <div class="overview-label">Haryana, India</div>
+            </div>
+            
+            <div class="overview-card">
+                <div class="overview-icon">⏱️</div>
+                <div class="overview-value">12 Hours</div>
+                <div class="overview-label">Sunrise to Sunset</div>
+            </div>
+            
+            <div class="overview-card">
+                <div class="overview-icon">🌤️</div>
+                <div class="overview-value">Dry</div>
+                <div class="overview-label">Slightly Overcast</div>
+            </div>
+        </div>
+        
+        <!-- Update army stats -->
+        <div class="casualties-total-box">
+            <div class="casualties-total-icon">⚔️</div>
+            <div class="casualties-total-title">Total Combatants</div>
+            <div class="casualties-total-value">~4 million</div>
+            
+            <!-- Donut Chart Visualization -->
+            <div class="casualties-donut-container">
+                <div class="casualties-donut">
+                    <div class="donut-segment kaurava-segment"></div>
+                    <div class="donut-segment pandava-segment"></div>
+                    <div class="donut-hole">
+                        <div class="donut-label">Day 1</div>
+                    </div>
+                </div>
+                
+                <div class="donut-legend">
+                    <div class="legend-item pandava-legend">
+                        <div class="legend-color pandava-color"></div>
+                        <div class="legend-info">
+                            <div class="legend-title">Pandava Army</div>
+                            <div class="legend-value">1.6 million (7 Akshauhini)</div>
+                        </div>
+                    </div>
+                    
+                    <div class="legend-item kaurava-legend">
+                        <div class="legend-color kaurava-color"></div>
+                        <div class="legend-info">
+                            <div class="legend-title">Kaurava Army</div>
+                            <div class="legend-value">2.4 million (11 Akshauhini)</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Special army composition box -->
+        <div class="special-strategy-box">
+            <div class="special-strategy-title">Army Composition</div>
+            <div class="strategy-description" style="margin-bottom: 20px;">
+                The combined forces of both armies included:
+            </div>
+            <div class="forces-composition">
+                <div class="force-item">
+                    <div class="force-icon">🛞</div>
+                    <div class="force-name">Chariots</div>
+                    <div class="force-value">435,000+</div>
+                </div>
+                <div class="force-item">
+                    <div class="force-icon">🐘</div>
+                    <div class="force-name">Elephants</div>
+                    <div class="force-value">230,000+</div>
+                </div>
+                <div class="force-item">
+                    <div class="force-icon">🐎</div>
+                    <div class="force-name">Cavalry</div>
+                    <div class="force-value">870,000+</div>
+                </div>
+                <div class="force-item">
+                    <div class="force-icon">👥</div>
+                    <div class="force-name">Infantry</div>
+                    <div class="force-value">2.5 million+</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Formations Section -->
+    <div id="formations" class="data-section">
+    <div class="formation-display">
+        <div class="formation-card">
+            <div class="formation-header">
+                <div class="formation-icon">🦢</div>
+                <h3 class="formation-title">Pandava Forces</h3>
+            </div>
+            <div class="formation-content">
+                <div class="formation-name">Krauncha Vyuha</div>
+                <div class="formation-image">
+                    <svg class="formation-svg" viewBox="0 0 300 200">
+                        <!-- Heron Formation for Pandavas -->
+                        <path d="M150,40 C100,80 100,160 150,200 C200,160 200,80 150,40" stroke="#4B9CD3" stroke-width="3" fill="none" />
+                            
+                        <!-- Wings -->
+                        <path d="M150,120 C120,100 80,110 60,140" stroke="#4B9CD3" stroke-width="3" fill="none" />
+                        <path d="M150,120 C180,100 220,110 240,140" stroke="#4B9CD3" stroke-width="3" fill="none" />
+                        
+                        <!-- Commander position (Dhrishtadyumna) -->
+                        <circle cx="150" cy="40" r="6" fill="#4B9CD3" stroke="#d5a26f" stroke-width="1"/>
+                        <text x="150" y="40" text-anchor="middle" dominant-baseline="middle" fill="#FFF" font-size="8" font-weight="bold">D</text>
+                    </svg>
+                </div>
+                <div class="formation-desc">Offensive Heron-shaped formation providing a sharp, piercing attack capability like a bird's beak</div>
+                <div class="commander-list">
+                    <div class="commander-badge">Dhrishtadyumna</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="formation-card">
+            <div class="formation-header">
+                <div class="formation-icon">💎</div>
+                <h3 class="formation-title">Kaurava Forces</h3>
+            </div>
+            <div class="formation-content">
+                <div class="formation-name">Vajra Vyuha</div>
+                <div class="formation-image">
+                    <svg class="formation-svg" viewBox="0 0 300 200">
+                        <!-- Diamond Formation -->
+                        <path d="M150,40 L100,100 L150,160 L200,100 Z" stroke="#C94C4C" stroke-width="3" fill="none" />
+                        
+                        <!-- Commander position (Bhishma) -->
+                        <circle cx="150" cy="40" r="6" fill="#C94C4C" stroke="#d5a26f" stroke-width="1"/>
+                        <text x="150" y="40" text-anchor="middle" dominant-baseline="middle" fill="#FFF" font-size="8" font-weight="bold">B</text>
+                        
+                        <!-- Add additional points for the diamond formation -->
+                        <line x1="150" y1="40" x2="150" y2="160" stroke="#C94C4C" stroke-width="2" stroke-dasharray="5,5" />
+                        <line x1="100" y1="100" x2="200" y2="100" stroke="#C94C4C" stroke-width="2" stroke-dasharray="5,5" />
+                    </svg>
+                </div>
+                <div class="formation-desc">Diamond-shaped defensive formation providing unbreakable, powerful resistance under Bhishma's command</div>
+                <div class="commander-list">
+                    <div class="commander-badge">Bhishma Pitamaha</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="strategic-analysis-box">
+        <div class="analysis-icon">💡</div>
+        <div class="analysis-content">
+            <div class="analysis-title">Strategic Analysis</div>
+            <div class="analysis-text">
+                On Day 1, the Pandavas deployed the Krauncha (Heron) formation for offensive capability, while the Kauravas countered with the Vajra (Diamond) formation for defense. Bhishma Pitamaha, despite being over 120 years old, led the Kaurava forces with unmatched skill, while the younger Dhrishtadyumna commanded the Pandava army with caution in his first day of engagement.
+            </div>
+        </div>
+    </div>
+</div>
+    
+    <!-- Casualties Analysis -->
+    <div id="casualties" class="data-section">
+        <div class="casualties-container">
+            <div class="casualties-chart-container">
+                <div class="chart-bars-container">
+                    <!-- Infantry bars -->
+                    <div class="chart-bar-column">
+                        <div class="chart-bar-stack">
+                            <div class="chart-bar kaurava-bar" style="height: 64%"></div>
+                            <div class="chart-bar pandava-bar" style="height: 36%"></div>
+                        </div>
+                        <div class="chart-bar-label">
+                            <div class="chart-bar-icon">👥</div>
+                            <div class="chart-bar-name">Infantry</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Cavalry bars -->
+                    <div class="chart-bar-column">
+                        <div class="chart-bar-stack">
+                            <div class="chart-bar kaurava-bar" style="height: 64%"></div>
+                            <div class="chart-bar pandava-bar" style="height: 36%"></div>
+                        </div>
+                        <div class="chart-bar-label">
+                            <div class="chart-bar-icon">🐎</div>
+                            <div class="chart-bar-name">Cavalry</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Chariots bars -->
+                    <div class="chart-bar-column">
+                        <div class="chart-bar-stack">
+                            <div class="chart-bar kaurava-bar" style="height: 64%"></div>
+                            <div class="chart-bar pandava-bar" style="height: 36%"></div>
+                        </div>
+                        <div class="chart-bar-label">
+                            <div class="chart-bar-icon">🛞</div>
+                            <div class="chart-bar-name">Chariots</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Elephants bars -->
+                    <div class="chart-bar-column">
+                        <div class="chart-bar-stack">
+                            <div class="chart-bar kaurava-bar" style="height: 64%"></div>
+                            <div class="chart-bar pandava-bar" style="height: 36%"></div>
+                        </div>
+                        <div class="chart-bar-label">
+                            <div class="chart-bar-icon">🐘</div>
+                            <div class="chart-bar-name">Elephants</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="chart-legend">
+                    <div class="legend-item kaurava-legend">
+                        <div class="legend-color"></div>
+                        <span class="legend-text">Kaurava (64%)</span>
+                    </div>
+                    <div class="legend-item pandava-legend">
+                        <div class="legend-color"></div>
+                        <span class="legend-text">Pandava (36%)</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="casualties-details">
+                <div class="casualties-card pandava-card">
+                    <div class="casualties-header pandava-header">
+                        <h3>Pandava Losses</h3>
+                    </div>
+                    <div class="casualties-body">
+                        <div class="casualties-grid">
+                            <div class="casualty-type">
+                                <div class="casualty-icon">👥</div>
+                                <div class="casualty-value">65,000</div>
+                                <div class="casualty-label">Infantry</div>
+                            </div>
+                            <div class="casualty-type">
+                                <div class="casualty-icon">🐎</div>
+                                <div class="casualty-value">15,000</div>
+                                <div class="casualty-label">Cavalry</div>
+                            </div>
+                            <div class="casualty-type">
+                                <div class="casualty-icon">🛞</div>
+                                <div class="casualty-value">7,000</div>
+                                <div class="casualty-label">Chariots</div>
+                            </div>
+                            <div class="casualty-type">
+                                <div class="casualty-icon">🐘</div>
+                                <div class="casualty-value">3,000</div>
+                                <div class="casualty-label">Elephants</div>
+                            </div>
+                        </div>
+                        
+                        <div class="total-percent">
+                            <div class="percent-label">Percentage of Total Casualties</div>
+                            <div class="percent-value">36%</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="casualties-card kaurava-card">
+                    <div classasualties-header kaurava-header>
+                        <h3>Kaurava Losses</h3>
+                    </div>
+                    <div class="casualties-body">
+                        <div class="casualties-grid">
+                            <div class="casualty-type">
+                                <div class="casualty-icon">👥</div>
+                                <div class="casualty-value">120,000</div>
+                                <div class="casualty-label">Infantry</div>
+                            </div>
+                            <div class="casualty-type">
+                                <div class="casualty-icon">🐎</div>
+                                <div class="casualty-value">25,000</div>
+                                <div class="casualty-label">Cavalry</div>
+                            </div>
+                            <div class="casualty-type">
+                                <div class="casualty-icon">🛞</div>
+                                <div class="casualty-value">10,000</div>
+                                <div class="casualty-label">Chariots</div>
+                            </div>
+                            <div class="casualty-type">
+                                <div class="casualty-icon">🐘</div>
+                                <div class="casualty-value">5,000</div>
+                                <div class="casualty-label">Elephants</div>
+                            </div>
+                        </div>
+                        
+                        <div class="total-percent">
+                            <div class="percent-label">Percentage of Total Casualties</div>
+                            <div class="percent-value">64%</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+// Direct script to ensure progress bars work
+document.addEventListener('DOMContentLoaded', function() {
+    console.log("Initializing casualties bars...");
+    
+    // Wait a moment to ensure DOM is ready
+    setTimeout(function() {
+        // Set the width directly using inline styles
+        var pandavaBar = document.querySelector('.side-casualties-bar.pandava-bar');
+        var kauravaBar = document.querySelector('.side-casualties-bar.kaurava-bar');
+        
+        if (pandavaBar) {
+            console.log("Setting Pandava bar width to 36%");
+            pandavaBar.style.width = '36%';
+        } else {
+            console.error("Pandava bar element not found");
+        }
+        
+        if (kauravaBar) {
+            console.log("Setting Kaurava bar width to 64%");
+            kauravaBar.style.width = '64%';
+        } else {
+            console.error("Kaurava bar element not found");
+        }
+    }, 500);
+});
+</script>
+</div>
+</body>
+</html>

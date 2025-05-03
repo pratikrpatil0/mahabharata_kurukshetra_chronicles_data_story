@@ -1,0 +1,158 @@
+<div class="timeline-dashboard">
+    <div class="dashboard-header">
+        <div class="header-icon">🌟</div>
+        <h2>Key Highlights & Timeline</h2>
+    </div>
+
+    <div class="view-controls">
+        <button class="view-btn active" data-view="timeline">
+            <span class="icon">⏱️</span><span>Timeline</span>
+        </button>
+        <button class="view-btn" data-view="intensity">
+            <span class="icon">📊</span><span>Battle Intensity</span>
+        </button>
+        <button class="view-btn" data-view="heroes">
+            <span class="icon">👑</span><span>Warrior Spotlight</span>
+        </button>
+    </div>
+
+    <div class="timeline-views">
+        <!-- Timeline View -->
+        <div id="timeline-view" class="dashboard-view active">
+            <div class="timeline-container">
+                <div class="timeline-axis"></div>
+                <div class="time-events">
+                    <div class="time-event" data-time="6:00 AM" data-importance="4">
+                        <div class="event-time">6:00 AM</div>
+                        <div class="event-marker" style="--marker-color: #c9a959;"></div>
+                        <div class="event-content">
+                            <div class="event-icon">🐚</div>
+                            <div class="event-desc">Battle begins</div>
+                        </div>
+                    </div>
+                    <div class="time-event" data-time="8:00 AM" data-importance="7">
+                        <div class="event-time">8:00 AM</div>
+                        <div class="event-marker" style="--marker-color: #e05353;"></div>
+                        <div class="event-content">
+                            <div class="event-icon">💪</div>
+                            <div class="event-desc">Bhima slays 100+</div>
+                        </div>
+                    </div>
+                    <div class="time-event" data-time="9:30 AM" data-importance="8">
+                        <div class="event-time">9:30 AM</div>
+                        <div class="event-marker" style="--marker-color: #e05353;"></div>
+                        <div class="event-content">
+                            <div class="event-icon">🏹</div>
+                            <div class="event-desc">Arjuna's Divyastras</div>
+                        </div>
+                    </div>
+                    <div class="time-event" data-time="11:00 AM" data-importance="6">
+                        <div class="event-time">11:00 AM</div>
+                        <div class="event-marker" style="--marker-color: #d87c4f;"></div>
+                        <div class="event-content">
+                            <div class="event-icon">⚔️</div>
+                            <div class="event-desc">Vrihadvala falls</div>
+                        </div>
+                    </div>
+                    <div class="time-event" data-time="12:00 PM" data-importance="5">
+                        <div class="event-time">12:00 PM</div>
+                        <div class="event-marker" style="--marker-color: #d87c4f;"></div>
+                        <div class="event-content">
+                            <div class="event-icon">🛞</div>
+                            <div class="event-desc">Eastern attack</div>
+                        </div>
+                    </div>
+                    <div class="time-event" data-time="1:00 PM" data-importance="6">
+                        <div class="event-time">1:00 PM</div>
+                        <div class="event-marker" style="--marker-color: #d87c4f;"></div>
+                        <div class="event-content">
+                            <div class="event-icon">🗡️</div>
+                            <div class="event-desc">Nakula's dual swords</div>
+                        </div>
+                    </div>
+                    <div class="time-event" data-time="3:00 PM" data-importance="9">
+                        <div class="event-time">3:00 PM</div>
+                        <div class="event-marker" style="--marker-color: #bb3f3f;"></div>
+                        <div class="event-content">
+                            <div class="event-icon">🌪️</div>
+                            <div class="event-desc">Arjuna's whirlwind</div>
+                        </div>
+                    </div>
+                    <div class="time-event" data-time="5:00 PM" data-importance="7">
+                        <div class="event-time">5:00 PM</div>
+                        <div class="event-marker" style="--marker-color: #e05353;"></div>
+                        <div class="event-content">
+                            <div class="event-icon">↩️</div>
+                            <div class="event-desc">Kaurava retreat</div>
+                        </div>
+                    </div>
+                    <div class="time-event" data-time="6:00 PM" data-importance="4">
+                        <div class="event-time">6:00 PM</div>
+                        <div class="event-marker" style="--marker-color: #c9a959;"></div>
+                        <div class="event-content">
+                            <div class="event-icon">🌙</div>
+                            <div class="event-desc">Day ends</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Battle Intensity View -->
+        <div id="intensity-view" class="dashboard-view">
+            <div class="chart-container">
+                <canvas id="battle-intensity-chart"></canvas>
+            </div>
+            <div class="insight-box">
+                <div class="insight-icon">✨</div>
+                <div class="insight-content">
+                    <h4>Battle Analysis</h4>
+                    <p>Peak intensity occurred at 3:00 PM when Arjuna's chariot turned into a blazing whirlwind, eliminating over 2,000 enemy soldiers in a devastating display of archery mastery.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Warrior Spotlight View -->
+        <div id="heroes-view" class="dashboard-view">
+            <div class="warrior-spotlight">
+                <div class="warrior-card bhima">
+                    <div class="warrior-header">
+                        <div class="warrior-icon">🛡️</div>
+                        <h3>Bhima (Pandava)</h3>
+                    </div>
+                    <ul class="warrior-stats">
+                        <li><strong>Kills:</strong> ~100–150 Kaurava warriors</li>
+                        <li><strong>Highlights:</strong> Smashed 12 elephants, 30 chariots, and 2 infantry platoons</li>
+                        <li><strong>Weapon:</strong> Mace (Gada), short sword</li>
+                        <li><strong>Tactic:</strong> Flank break and frontal breach using brute strength</li>
+                    </ul>
+                </div>
+                
+                <div class="warrior-card arjuna">
+                    <div class="warrior-header">
+                        <div class="warrior-icon">🏹</div>
+                        <h3>Arjuna (Pandava)</h3>
+                    </div>
+                    <ul class="warrior-stats">
+                        <li><strong>Kills:</strong> Estimated 7,000+ soldiers (indirect), 1 general</li>
+                        <li><strong>Weapons Used:</strong> Gandiva bow, celestial arrows (Agneya, Vayavya)</li>
+                        <li><strong>Strategy:</strong> Pinpoint strikes, long-range suppression, command-center dismantling</li>
+                        <li><strong>Charioteer:</strong> Krishna — guided flanking attacks and cavalry disruption</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Event Details Modal -->
+    <div id="event-modal" class="event-modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <div class="modal-header">
+                <div id="modal-time" class="modal-time"></div>
+                <div id="modal-title" class="modal-title"></div>
+            </div>
+            <div id="modal-desc" class="modal-desc"></div>
+        </div>
+    </div>
+</div>

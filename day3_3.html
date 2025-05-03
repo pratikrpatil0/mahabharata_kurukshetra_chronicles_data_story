@@ -1,0 +1,152 @@
+<div class="timeline-dashboard">
+    <div class="dashboard-header">
+        <div class="header-icon">🌟</div>
+        <h2>Day 3 Timeline</h2>
+    </div>
+
+    <div class="view-controls">
+        <button class="view-btn active" data-view="timeline">
+            <span class="icon">⏱️</span><span>Timeline</span>
+        </button>
+        <button class="view-btn" data-view="intensity">
+            <span class="icon">📊</span><span>Battle Intensity</span>
+        </button>
+        <button class="view-btn" data-view="heroes">
+            <span class="icon">👑</span><span>Hero Activity</span>
+        </button>
+    </div>
+
+    <div class="timeline-views">
+        <!-- Timeline View -->
+        <div id="timeline-view" class="dashboard-view active">
+            <div class="timeline-container">
+                <div class="timeline-axis"></div>
+                <div class="time-events">
+                    <div class="time-event" data-time="6:00 AM" data-importance="3">
+                        <div class="event-time">6:00 AM</div>
+                        <div class="event-marker" style="--marker-color: #c9a959;"></div>
+                        <div class="event-content">
+                            <div class="event-icon">🐚</div>
+                            <div class="event-desc">Battle commences</div>
+                        </div>
+                    </div>
+                    <div class="time-event" data-time="8:00 AM" data-importance="5">
+                        <div class="event-time">8:00 AM</div>
+                        <div class="event-marker" style="--marker-color: #d87c4f;"></div>
+                        <div class="event-content">
+                            <div class="event-icon">🏹</div>
+                            <div class="event-desc">Arjuna vs thousands</div>
+                        </div>
+                    </div>
+                    <div class="time-event" data-time="9:30 AM" data-importance="4">
+                        <div class="event-time">9:30 AM</div>
+                        <div class="event-marker" style="--marker-color: #d87c4f;"></div>
+                        <div class="event-content">
+                            <div class="event-icon">🛞</div>
+                            <div class="event-desc">Satyaki & Abhimanyu</div>
+                        </div>
+                    </div>
+                    <div class="time-event" data-time="11:00 AM" data-importance="7">
+                        <div class="event-time">11:00 AM</div>
+                        <div class="event-marker" style="--marker-color: #e05353;"></div>
+                        <div class="event-content">
+                            <div class="event-icon">💪</div>
+                            <div class="event-desc">Bhima vs Duryodhana</div>
+                        </div>
+                    </div>
+                    <div class="time-event" data-time="12:00 PM" data-importance="6">
+                        <div class="event-time">12:00 PM</div>
+                        <div class="event-marker" style="--marker-color: #d87c4f;"></div>
+                        <div class="event-content">
+                            <div class="event-icon">⚔️</div>
+                            <div class="event-desc">Bhishma restores order</div>
+                        </div>
+                    </div>
+                    <div class="time-event" data-time="1:00 PM" data-importance="8">
+                        <div class="event-time">1:00 PM</div>
+                        <div class="event-marker" style="--marker-color: #e05353;"></div>
+                        <div class="event-content">
+                            <div class="event-icon">🛡️</div>
+                            <div class="event-desc">Shikhandi confronts Bhishma</div>
+                        </div>
+                    </div>
+                    <div class="time-event" data-time="3:00 PM" data-importance="9">
+                        <div class="event-time">3:00 PM</div>
+                        <div class="event-marker" style="--marker-color: #bb3f3f;"></div>
+                        <div class="event-content">
+                            <div class="event-icon">🔄</div>
+                            <div class="event-desc">Krishna's intervention</div>
+                        </div>
+                    </div>
+                    <div class="time-event" data-time="5:00 PM" data-importance="8">
+                        <div class="event-time">5:00 PM</div>
+                        <div class="event-marker" style="--marker-color: #e05353;"></div>
+                        <div class="event-content">
+                            <div class="event-icon">⚡</div>
+                            <div class="event-desc">Arjuna vs Bhishma</div>
+                        </div>
+                    </div>
+                    <div class="time-event" data-time="6:00 PM" data-importance="3">
+                        <div class="event-time">6:00 PM</div>
+                        <div class="event-marker" style="--marker-color: #c9a959;"></div>
+                        <div class="event-content">
+                            <div class="event-icon">🌙</div>
+                            <div class="event-desc">Armies retreat</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Battle Intensity View -->
+        <div id="intensity-view" class="dashboard-view">
+            <div class="chart-container">
+                <canvas id="battle-intensity-chart"></canvas>
+            </div>
+            <div class="insight-box">
+                <div class="insight-icon">✨</div>
+                <div class="insight-content">
+                    <h4>Battle Analysis</h4>
+                    <p>Peak intensity occurred at 3:00 PM when Krishna nearly unleashed his divine power, creating a critical pivot point in the day's battle dynamics.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Hero Activity View -->
+        <div id="heroes-view" class="dashboard-view">
+            <div class="hero-chart-container">
+                <canvas id="hero-activity-chart"></canvas>
+            </div>
+            <div class="legend-container">
+                <div class="legend-item">
+                    <div class="legend-color bhishma"></div>
+                    <div class="legend-label">Bhishma</div>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color arjuna"></div>
+                    <div class="legend-label">Arjuna</div>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color bhima"></div>
+                    <div class="legend-label">Bhima</div>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color krishna"></div>
+                    <div class="legend-label">Krishna</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Event Details Modal -->
+    <div id="event-modal" class="event-modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <div class="modal-header">
+                <div id="modal-time" class="modal-time"></div>
+                <div id="modal-title" class="modal-title"></div>
+            </div>
+            <div id="modal-desc" class="modal-desc"></div>
+        </div>
+    </div>
+</div>

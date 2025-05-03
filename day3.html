@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Day 3: Bhishma's Massacre | Kurukshetra War Chronicles</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Cormorant+Garamond:ital,wght@1,400;1,600&family=Marcellus&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="day3.css">
+    <link rel="stylesheet" href="battle-slider_3.css">
+    <link rel="stylesheet" href="day3_1.css">
+    <link rel="stylesheet" href="day3_2.css">
+    <link rel="stylesheet" href="day3_3.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2"></script>
+    <script src="battle-slider_3.js" defer></script>
+    <script src="day3_1.js" defer></script>
+    <script src="day3_2.js" defer></script>
+</head>
+<body>
+    <!-- Background video with sword animation -->
+    <div class="background-video-container">
+        <video class="background-video" autoplay loop muted playsinline>
+            <source src="sword_animation.webm" type="video/webm">
+            <!-- Fallback if WebM isn't supported -->
+            <source src="sword_animation.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+
+    <!-- Blood-like overlay for war theme -->
+    <div class="blood-overlay"></div>
+    
+    <!-- Vignette effect for aged, ancient look -->
+    <div class="vignette"></div>
+    
+    <!-- Enhanced Blood drips from top to bottom -->
+    <div class="blood-drip-container">
+        <!-- Blood drip divs remain unchanged -->
+    </div>
+    
+    <!-- Blood spatter (tiny dots) -->
+    <div class="blood-spatter-container">
+        <div class="blood-spatter"></div>
+    </div>
+    
+    <!-- Blood pulse effect -->
+    <div class="blood-pulse"></div>
+
+    <!-- Navigation bar -->
+    <a href="front.html" class="logo-container" id="logo-link">
+        <img src="kc.png" alt="Kurukshetra Chronicles" class="logo" />
+    </a>
+
+    <header class="navbar">
+        <nav class="nav-links">
+            <a href="#trailer">Trailer</a>
+            <a href="#introduction">Introduction</a>
+            <a href="war_chronicles.html" id="chronicles-link">War Chronicles</a>
+            <a href="#conclusion">Conclusion</a>
+            <a href="#project">About Project</a>
+            <a href="#me">About Me</a>
+        </nav>
+    </header>
+
+    <!-- Intro Section with Title -->
+    <section class="intro-section">
+        <!-- Day 3 Title -->
+        <h1 class="page-title">Day 3: Bhishma's Massacre</h1>
+        <p class="page-subtitle">With over 300,000 dead, Bhishma unleashed fury—slaying 50,000 alone, as Shikhandi loomed in the wings</p>
+    </section>
+
+    <!-- Content Container -->
+    <div class="content-container">
+        <!-- Include the battle slider section -->
+        <div id="slider-container"></div>
+        
+        <!-- Include the battlefield analytics dashboard -->
+        <div id="battlefield-analytics-container"></div>
+
+        <!-- Combat Statistics Component -->
+        <div id="combat-statistics-section" class="content-section">
+            <div id="combat-statistics-container">
+                <!-- Combat Statistics Dashboard will be loaded here -->
+            </div>
+        </div>
+        <script>
+            // Load the combat statistics dashboard into the container
+            document.addEventListener('DOMContentLoaded', function() {
+                fetch('day3_2.html')
+                    .then(response => response.text())
+                    .then(data => {
+                        document.getElementById('combat-statistics-container').innerHTML = data;
+                        
+                        // Complete initialization of all components
+                        setTimeout(() => {
+                            // Initialize the currently active view
+                            const activeView = document.querySelector('#combat-statistics-container .dashboard-view.active');
+                            if (activeView) {
+                                if (activeView.id === 'chart-view') {
+                                    initializeChart();
+                                } else if (activeView.id === 'comparison-view') {
+                                    animateComparisonBars();
+                                    initializeRadarChart();
+                                } else if (activeView.id === 'impact-view') {
+                                    animateImpactCards();
+                                    initializeHeatmap();
+                                }
+                            }
+                            
+                            // Set up toggle button functionality properly
+                            const toggleButtons = document.querySelectorAll('#combat-statistics-container .toggle-btn');
+                            toggleButtons.forEach(button => {
+                                button.addEventListener('click', function() {
+                                    const targetView = this.getAttribute('data-view');
+                                    
+                                    // Update active button
+                                    toggleButtons.forEach(btn => btn.classList.remove('active'));
+                                    this.classList.add('active');
+                                    
+                                    // Show selected view
+                                    const dashboardViews = document.querySelectorAll('#combat-statistics-container .dashboard-view');
+                                    dashboardViews.forEach(view => {
+                                        view.classList.remove('active');
+                                        if (view.id === targetView + '-view') {
+                                            view.classList.add('active');
+                                        }
+                                    });
+                                    
+                                    // Trigger animations for the active view
+                                    if (targetView === 'chart') {
+                                        initializeChart();
+                                    } else if (targetView === 'comparison') {
+                                        animateComparisonBars();
+                                        initializeRadarChart();
+                                    } else if (targetView === 'impact') {
+                                        animateImpactCards();
+                                        initializeHeatmap();
+                                    }
+                                });
+                            });
+                        }, 500);
+                    })
+                    .catch(error => {
+                        console.error('Error loading combat statistics:', error);
+                        document.getElementById('combat-statistics-container').innerHTML = 
+                            '<div class="error-message">Error loading combat statistics. Please refresh the page.</div>';
+                    });
+            });
+        </script>
+
+        <!-- Timeline Section -->
+<div id="timeline-section" class="content-section">
+    <h2 class="section-title">Battle Timeline</h2>
+    <div id="timeline-container">
+        <!-- Timeline visualization will be loaded here -->
+    </div>
+</div>
+
+<script>
+    // Load the timeline visualization
+    document.addEventListener('DOMContentLoaded', function() {
+        // First ensure Chart.js is loaded
+        if (!document.querySelector('script[src*="chart.js"]')) {
+            const chartScript = document.createElement('script');
+            chartScript.src = 'https://cdn.jsdelivr.net/npm/chart.js';
+            document.head.appendChild(chartScript);
+        }
+        
+        // Then ensure CSS is loaded
+        if (!document.querySelector('link[href="day3_3.css"]')) {
+            const link = document.createElement('link');
+            link.rel = 'stylesheet';
+            link.href = 'day3_3.css';
+            document.head.appendChild(link);
+        }
+        
+        // Finally load the HTML and JS
+        setTimeout(() => {
+            fetch('day3_3.html')
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.text();
+                })
+                .then(data => {
+                    document.getElementById('timeline-container').innerHTML = data;
+                    
+                    // Initialize the timeline functionality immediately
+                    initializeTimeline();
+                    
+                    console.log("Timeline components loaded successfully");
+                })
+                .catch(error => {
+                    console.error('Error loading timeline visualization:', error);
+                    document.getElementById('timeline-container').innerHTML = 
+                        '<div class="error-message">Error loading timeline visualization. Please refresh the page.</div>';
+                });
+        }, 300);
+    });
+    
+    // Function to initialize timeline manually
+    function initializeTimeline() {
+        // Load the script
+        const script = document.createElement('script');
+        script.src = 'day3_3.js';
+        
+        // When it loads, manually initialize the components
+        script.onload = function() {
+            console.log("Manual initialization of timeline components");
+            
+            // Initialize timeline events
+            const timeEvents = document.querySelectorAll('.time-event');
+            timeEvents.forEach(event => {
+                event.addEventListener('click', function() {
+                    // Get the time from data attribute
+                    const time = this.getAttribute('data-time');
+                    // Call the openModal function from day3_3.js
+                    if (typeof openModal === 'function') {
+                        // The function will handle getting title and description
+                        const timeStr = time;
+                        let title, description;
+                        
+                        // Determine title and description based on time
+                        switch(time) {
+                            case '3:00 PM':
+                                title = 'Krishna\'s Divine Intervention';
+                                description = 'Witnessing relentless attacks on Arjuna, Krishna loses his composure and charges towards Bhishma with his Sudarshana Chakra.';
+                                break;
+                            // Add cases for other times as needed
+                            default:
+                                title = 'Battle Event';
+                                description = 'A significant event occurred at ' + time;
+                        }
+                        
+                        openModal(timeStr, title, description);
+                    }
+                });
+            });
+            
+            // Initialize view buttons manually
+            const viewButtons = document.querySelectorAll('.view-btn');
+            const dashboardViews = document.querySelectorAll('.dashboard-view');
+            
+            viewButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const targetView = this.getAttribute('data-view');
+                    console.log("Button clicked: " + targetView);
+                    
+                    // Update active button
+                    viewButtons.forEach(btn => btn.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // Show selected view
+                    dashboardViews.forEach(view => {
+                        view.classList.remove('active');
+                        if (view.id === targetView + '-view') {
+                            view.classList.add('active');
+                            
+                            // Initialize charts based on view
+                            if (targetView === 'intensity' && typeof initializeBattleIntensityChart === 'function') {
+                                setTimeout(initializeBattleIntensityChart, 100);
+                            } else if (targetView === 'heroes' && typeof initializeHeroActivityChart === 'function') {
+                                setTimeout(initializeHeroActivityChart, 100);
+                            }
+                        }
+                    });
+                });
+            });
+            
+            // Initialize modal
+            if (typeof initializeEventModal === 'function') {
+                initializeEventModal();
+            }
+        };
+        
+        document.body.appendChild(script);
+    }
+</script>
+        
+        <!-- Casualty Analysis Section -->
+<div id="casualty-section" class="content-section">
+    <h2 class="section-title">Casualty Analysis</h2>
+    <div id="casualty-container">
+        <!-- Casualty dashboard will be loaded here -->
+    </div>
+</div>
+
+<script>
+    // Improved casualty dashboard loader with robust error handling
+    document.addEventListener('DOMContentLoaded', function() {
+        // Load dependencies first
+        const dependencies = [
+            {type: 'script', src: 'https://cdn.jsdelivr.net/npm/chart.js'},
+            {type: 'style', href: 'day3_4.css'}
+        ];
+        
+        loadDependencies(dependencies)
+            .then(() => loadCasualtyDashboard())
+            .catch(error => {
+                console.error('Error in casualty dashboard setup:', error);
+                document.getElementById('casualty-container').innerHTML = 
+                    '<div class="error-message">Error loading casualty analysis. Please refresh the page.</div>';
+            });
+    });
+
+    // Function to load multiple dependencies (JS/CSS) in sequence
+    function loadDependencies(deps) {
+        return deps.reduce((promise, dep) => {
+            return promise.then(() => {
+                return new Promise((resolve, reject) => {
+                    // Skip if already loaded
+                    const isLoaded = dep.type === 'script' ? 
+                        !!document.querySelector(`script[src="${dep.src}"]`) :
+                        !!document.querySelector(`link[href="${dep.href}"]`);
+                    
+                    if (isLoaded) {
+                        console.log(`${dep.type} already loaded:`, dep.src || dep.href);
+                        resolve();
+                        return;
+                    }
+                    
+                    // Create the element
+                    const el = document.createElement(dep.type === 'script' ? 'script' : 'link');
+                    
+                    // Add attributes
+                    if (dep.type === 'script') {
+                        el.src = dep.src;
+                    } else {
+                        el.rel = 'stylesheet';
+                        el.href = dep.href;
+                    }
+                    
+                    // Set up load handling
+                    el.onload = () => {
+                        console.log(`${dep.type} loaded:`, dep.src || dep.href);
+                        resolve();
+                    };
+                    el.onerror = () => reject(new Error(`Failed to load ${dep.src || dep.href}`));
+                    
+                    // Add to document
+                    document.head.appendChild(el);
+                });
+            });
+        }, Promise.resolve());
+    }
+
+    // Function to load and initialize the casualty dashboard
+    function loadCasualtyDashboard() {
+        return fetch('day3_4.html')
+            .then(response => {
+                if (!response.ok) throw new Error('Failed to load day3_4.html');
+                return response.text();
+            })
+            .then(html => {
+                // Insert the HTML
+                document.getElementById('casualty-container').innerHTML = html;
+                console.log("Casualty dashboard HTML inserted");
+                
+                // Initialize the dashboard manually for more control
+                return initializeCasualtyDashboard();
+            });
+    }
+    
+    // Function to manually initialize the dashboard
+    function initializeCasualtyDashboard() {
+        return new Promise((resolve, reject) => {
+            console.log("Manually initializing casualty dashboard...");
+            
+            try {
+                // 1. Set up tab switching
+                const tabs = document.querySelectorAll('#casualty-container .view-tab');
+                const views = document.querySelectorAll('#casualty-container .dashboard-view');
+                
+                console.log(`Found ${tabs.length} tabs and ${views.length} views`);
+                
+                if (tabs.length && views.length) {
+                    tabs.forEach(tab => {
+                        tab.addEventListener('click', function() {
+                            console.log("Tab clicked:", this.getAttribute('data-view'));
+                            
+                            // Update active tab
+                            tabs.forEach(t => t.classList.remove('active'));
+                            this.classList.add('active');
+                            
+                            // Show selected view
+                            const targetView = this.getAttribute('data-view');
+                            views.forEach(view => {
+                                view.classList.remove('active');
+                                if (view.id === targetView + '-view') {
+                                    view.classList.add('active');
+                                }
+                            });
+                        });
+                    });
+                } else {
+                    console.warn("Missing tabs or views in casualty dashboard");
+                }
+                
+                // 2. Initialize casualties chart
+                setTimeout(() => {
+                    const ctx = document.getElementById('casualties-chart');
+                    if (!ctx) {
+                        console.error("Cannot find casualties chart canvas");
+                        return;
+                    }
+                    
+                    if (typeof Chart === 'undefined') {
+                        console.error("Chart.js not available!");
+                        return;
+                    }
+                    
+                    console.log("Creating casualties chart...");
+                    
+                    // Data for casualties
+                    const data = {
+                        labels: ['Chariots', 'Elephants', 'Cavalry', 'Infantry'],
+                        datasets: [
+                            {
+                                label: 'Pandavas',
+                                data: [10000, 3000, 12000, 95000],
+                                backgroundColor: 'rgba(100, 149, 237, 0.7)',
+                                borderColor: 'rgba(100, 149, 237, 1)',
+                                borderWidth: 1
+                            },
+                            {
+                                label: 'Kauravas',
+                                data: [15000, 6000, 18000, 141000],
+                                backgroundColor: 'rgba(220, 20, 60, 0.7)',
+                                borderColor: 'rgba(220, 20, 60, 1)',
+                                borderWidth: 1
+                            }
+                        ]
+                    };
+                    
+                    // Custom icons for x-axis
+                    const icons = ['🛞', '🐘', '🐎', '👥'];
+                    
+                    // Create chart
+                    new Chart(ctx, {
+                        type: 'bar',
+                        data: data,
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            scales: {
+                                x: {
+                                    grid: {
+                                        display: false
+                                    },
+                                    ticks: {
+                                        color: '#d5a26f',
+                                        callback: function(value, index) {
+                                            return icons[index] + ' ' + data.labels[index];
+                                        }
+                                    }
+                                },
+                                y: {
+                                    beginAtZero: true,
+                                    grid: {
+                                        color: 'rgba(213, 162, 111, 0.1)'
+                                    },
+                                    ticks: {
+                                        color: '#f5e6cc',
+                                        callback: function(value) {
+                                            if (value >= 1000) {
+                                                return (value / 1000) + 'k';
+                                            }
+                                            return value;
+                                        }
+                                    }
+                                }
+                            },
+                            plugins: {
+                                legend: {
+                                    position: 'top',
+                                    labels: {
+                                        color: '#f5e6cc',
+                                        font: {
+                                            family: 'Cinzel'
+                                        },
+                                        usePointStyle: true
+                                    }
+                                },
+                                tooltip: {
+                                    callbacks: {
+                                        title: function(tooltipItems) {
+                                            const index = tooltipItems[0].dataIndex;
+                                            return icons[index] + ' ' + data.labels[index];
+                                        },
+                                        label: function(context) {
+                                            let value = context.parsed.y;
+                                            if (value >= 1000) {
+                                                value = (value / 1000).toFixed(1) + 'k';
+                                            }
+                                            return context.dataset.label + ': ' + value;
+                                        },
+                                        afterBody: function(tooltipItems) {
+                                            const dataIndex = tooltipItems[0].dataIndex;
+                                            let ratio;
+                                            
+                                            // Calculate ratio
+                                            const kauravaValue = data.datasets[1].data[dataIndex];
+                                            const pandavaValue = data.datasets[0].data[dataIndex];
+                                            ratio = (kauravaValue / pandavaValue).toFixed(1);
+                                            
+                                            return 'Kaurava:Pandava ratio = ' + ratio + ':1';
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    });
+                    
+                    console.log("Casualties chart created successfully");
+                    
+                    // 3. Add entry animations
+                    animateEntryElements();
+                    
+                    resolve();
+                }, 500);
+            } catch (err) {
+                console.error("Error initializing casualty dashboard:", err);
+                reject(err);
+            }
+        });
+    }
+    
+    // Function to animate dashboard elements
+    function animateEntryElements() {
+        // Animate army totals with delay
+        const totals = document.querySelectorAll('#casualty-container .army-total');
+        totals.forEach((total, index) => {
+            total.style.opacity = '0';
+            total.style.transform = 'translateY(20px)';
+            
+            setTimeout(() => {
+                total.style.transition = 'all 0.6s ease';
+                total.style.opacity = '1';
+                total.style.transform = 'translateY(0)';
+            }, index * 200);
+        });
+        
+        // Animate insights with delay
+        const insights = document.querySelectorAll('#casualty-container .insight');
+        insights.forEach((insight, index) => {
+            insight.style.opacity = '0';
+            insight.style.transform = 'translateY(15px)';
+            
+            setTimeout(() => {
+                insight.style.transition = 'all 0.5s ease';
+                insight.style.opacity = '1';
+                insight.style.transform = 'translateY(0)';
+            }, 500 + index * 150);
+        });
+        
+        // Animate highlights with delay
+        const highlights = document.querySelectorAll('#casualty-container .highlight');
+        highlights.forEach((highlight, index) => {
+            highlight.style.opacity = '0';
+            highlight.style.transform = 'translateX(-10px)';
+            
+            setTimeout(() => {
+                highlight.style.transition = 'all 0.4s ease';
+                highlight.style.opacity = '1';
+                highlight.style.transform = 'translateX(0)';
+            }, index * 200);
+        });
+    }
+</script>
+        
+        <!-- Rest of your content sections here -->
+    </div>
+
+    <script>
+        // Load the components dynamically
+        document.addEventListener('DOMContentLoaded', function() {
+            // Load slider component
+            fetch('battle-slider_3.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('slider-container').innerHTML = data;
+                    // Initialize slider after loading
+                    setTimeout(function() {
+                        if (typeof showSlides === 'function') {
+                            showSlides(1);
+                        }
+                    }, 100);
+                });
+                
+            // Load the battlefield analytics dashboard
+            fetch('day3_1.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('battlefield-analytics-container').innerHTML = data;
+                    
+                    // Execute scripts in the fetched HTML
+                    setTimeout(() => {
+                        const scripts = document.getElementById('battlefield-analytics-container').querySelectorAll('script');
+                        scripts.forEach(script => {
+                            const newScript = document.createElement('script');
+                            Array.from(script.attributes).forEach(attr => {
+                                newScript.setAttribute(attr.name, attr.value);
+                            });
+                            newScript.textContent = script.textContent;
+                            script.parentNode.replaceChild(newScript, script);
+                        });
+                    }, 500);
+                });
+        });
+    </script>
+</body>
+</html>

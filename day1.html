@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The War Begins – Kurukshetra War Chronicle</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Cormorant+Garamond:ital,wght@1,400;1,600&family=Marcellus&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="day2.css">
+    <link rel="stylesheet" href="battle_slider_1.css">
+    <script src="battle_slider_1.js" defer></script>
+</head>
+<body>
+    <!-- Background video with sword animation -->
+    <div class="background-video-container">
+        <video class="background-video" autoplay loop muted playsinline>
+            <source src="sword_animation.webm" type="video/webm">
+            <!-- Fallback if WebM isn't supported -->
+            <source src="sword_animation.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+    </div>
+
+    <!-- Blood-like overlay for war theme -->
+    <div class="blood-overlay"></div>
+    
+    <!-- Vignette effect for aged, ancient look -->
+    <div class="vignette"></div>
+    
+    <!-- Enhanced Blood drips from top to bottom -->
+    <div class="blood-drip-container">
+        <div class="blood-drip"></div>
+        <div class="blood-drip"></div>
+        <div class="blood-drip"></div>
+        <div class="blood-drip"></div>
+        <div class="blood-drip"></div>
+        <div class="blood-drip"></div>
+        <div class="blood-drip"></div>
+        <div class="blood-drip"></div>
+        <div class="blood-drip"></div>
+        <div class="blood-drip"></div>
+        <div class="blood-drip"></div>
+        <div class="blood-drip"></div>
+    </div>
+    
+    <!-- Blood spatter (tiny dots) -->
+    <div class="blood-spatter-container">
+        <div class="blood-spatter"></div>
+    </div>
+    
+    <!-- Blood pulse effect -->
+    <div class="blood-pulse"></div>
+
+    <!-- Navigation bar -->
+    <a href="front.html" class="logo-container" id="logo-link">
+        <img src="kc.png" alt="Kurukshetra Chronicles" class="logo" />
+    </a>
+
+    <header class="navbar">
+        <nav class="nav-links">
+            <a href="#trailer">Trailer</a>
+            <a href="#introduction">Introduction</a>
+            <a href="war_chronicles.html" id="chronicles-link">War Chronicles</a>
+            <a href="#conclusion">Conclusion</a>
+            <a href="#project">About Project</a>
+            <a href="#me">About Me</a>
+        </nav>
+    </header>
+
+    <!-- Intro Section with Title -->
+    <section class="intro-section">
+        <h1 class="page-title">The War Begins – Kurukshetra War Chronicle</h1>
+        <p class="page-subtitle">"When the conch shells sounded at dawn, the fate of two mighty armies was forever sealed in history."</p>
+    </section>
+
+    <!-- Content container - now with battle slider -->
+    <div class="content-container">
+        <!-- Battle Slider Section -->
+        <div class="slider-section">    
+            <div class="battle-slider-container">
+                <div class="battle-slider">
+                    <div class="slide fade">
+                        <div class="slide-number">1/5</div>
+                        <img src="day1_1.png" alt="Battle scene from Day 1">
+                        <div class="fullscreen-button" onclick="openFullscreen('day1_1.png')">⛶</div>
+                    </div>
+                    
+                    <div class="slide fade">
+                        <div class="slide-number">2/5</div>
+                        <img src="day1_2.png" alt="Bhishma leads the Kaurava army">
+                        <div class="fullscreen-button" onclick="openFullscreen('day1_2.png')">⛶</div>
+                    </div>
+                    
+                    <div class="slide fade">
+                        <div class="slide-number">3/5</div>
+                        <img src="day1_3.png" alt="Arjuna's archery">
+                        <div class="fullscreen-button" onclick="openFullscreen('day1_3.png')">⛶</div>
+                    </div>
+                    
+                    <div class="slide fade">
+                        <div class="slide-number">4/5</div>
+                        <img src="day1_4.png" alt="Kaurava warriors">
+                        <div class="fullscreen-button" onclick="openFullscreen('day1_4.png')">⛶</div>
+                    </div>
+                    
+                    <div class="slide fade">
+                        <div class="slide-number">5/5</div>
+                        <img src="day1_5.png" alt="Day 1 battlefield overview">
+                        <div class="fullscreen-button" onclick="openFullscreen('day1_5.png')">⛶</div>
+                    </div>
+                    
+                    <!-- Navigation arrows -->
+                    <a class="prev" onclick="changeSlide(-1)">&#10094;</a>
+                    <a class="next" onclick="changeSlide(1)">&#10095;</a>
+                </div>
+                
+                <!-- Navigation dots -->
+                <div class="dots-container">
+                    <span class="dot" onclick="currentSlide(1)"></span>
+                    <span class="dot" onclick="currentSlide(2)"></span>
+                    <span class="dot" onclick="currentSlide(3)"></span>
+                    <span class="dot" onclick="currentSlide(4)"></span>
+                    <span class="dot" onclick="currentSlide(5)"></span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Fullscreen overlay -->
+        <div id="fullscreen-overlay" class="fullscreen-overlay">
+            <span class="close-fullscreen" onclick="closeFullscreen()">&times;</span>
+            <div class="fullscreen-content">
+                <img id="fullscreen-image" src="">
+            </div>
+        </div>
+    </div>
+
+    <!-- Battlefield Analytics Dashboard Section -->
+<div id="battlefield-analytics-section" class="content-section">
+    <h2 class="section-title">Battlefield Analytics</h2>
+    <div id="battlefield-analytics-container">
+        <!-- Battlefield analytics will be loaded here -->
+    </div>
+</div>
+
+<!-- Combat Statistics Dashboard Section -->
+<div id="combat-statistics-section" class="content-section">
+    <h2 class="section-title">Combat Statistics</h2>
+    <div id="combat-statistics-container">
+        <!-- Combat statistics will be loaded here -->
+    </div>
+</div>
+
+<!-- Timeline Dashboard Section -->
+<div id="timeline-section" class="content-section">
+    <h2 class="section-title">Battle Timeline</h2>
+    <div id="timeline-container">
+        <!-- Timeline will be loaded here -->
+    </div>
+</div>
+
+<!-- Casualties Dashboard Section -->
+<div id="casualties-section" class="content-section">
+    <h2 class="section-title">Casualty Breakdown</h2>
+    <div id="casualties-container">
+        <!-- Casualties will be loaded here -->
+    </div>
+</div>
+
+    <!-- Footer -->
+    <footer>
+        <!-- Empty footer as requested -->
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log("Page loaded successfully");
+            // Initialize the slider
+            showSlides(1);
+        });
+    </script>
+
+    <!-- Script to load battlefield analytics -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const analyticsContainer = document.getElementById('battlefield-analytics-container');
+        if (!analyticsContainer) return;
+        
+        console.log("Loading Day 1 battlefield analytics dashboard...");
+        
+        // Load CSS for Day 1 battlefield analytics
+        if (!document.querySelector('link[href="day1_1.css"]')) {
+            const link = document.createElement('link');
+            link.rel = 'stylesheet';
+            link.href = 'day1_1.css';
+            document.head.appendChild(link);
+        }
+        
+        // Load HTML content
+        fetch('day1_1.html')
+            .then(response => response.text())
+            .then(html => {
+                analyticsContainer.innerHTML = html;
+                
+                // First initialize the buttons directly
+                initializeAnalyticsButtons();
+                
+                // Then create and load script for other functionality
+                const script = document.createElement('script');
+                script.src = 'day1_1.js';
+                document.body.appendChild(script);
+            })
+            .catch(error => {
+                console.error("Error loading battlefield analytics:", error);
+                analyticsContainer.innerHTML = 
+                    '<div class="error-message" style="padding: 20px; color: #d5a26f;">Failed to load battlefield analytics</div>';
+            });
+    });
+    
+    // Button initialization function for Day 1
+    function initializeAnalyticsButtons() {
+        const toggleButtons = document.querySelectorAll('.toggle-btn');
+        const dataSections = document.querySelectorAll('.data-section');
+        
+        console.log(`Found ${toggleButtons.length} toggle buttons and ${dataSections.length} data sections`);
+        
+        if (toggleButtons.length && dataSections.length) {
+            toggleButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const targetId = this.getAttribute('data-target');
+                    console.log(`Toggle button clicked: ${targetId}`);
+                    
+                    // Hide all sections
+                    dataSections.forEach(section => section.classList.remove('active'));
+                    
+                    // Deactivate all buttons
+                    toggleButtons.forEach(btn => btn.classList.remove('active'));
+                    
+                    // Show target section and activate button
+                    document.getElementById(targetId).classList.add('active');
+                    this.classList.add('active');
+                });
+            });
+        }
+    }
+</script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const statisticsContainer = document.getElementById('combat-statistics-container');
+        if (!statisticsContainer) return;
+        
+        console.log("Loading combat statistics dashboard...");
+        
+        // First load Chart.js with error handling
+        const chartScript = document.createElement('script');
+        chartScript.src = 'https://cdn.jsdelivr.net/npm/chart.js';
+        chartScript.onload = function() {
+            console.log("Chart.js loaded successfully");
+            loadCombatStats();
+        };
+        chartScript.onerror = function() {
+            console.error("Failed to load Chart.js");
+            statisticsContainer.innerHTML = '<div style="padding:20px;color:#d5a26f;">Failed to load Chart.js library</div>';
+        };
+        document.head.appendChild(chartScript);
+        
+        function loadCombatStats() {
+            // Load CSS
+            const cssLink = document.createElement('link');
+            cssLink.rel = 'stylesheet';
+            cssLink.href = 'day2_2.css';
+            document.head.appendChild(cssLink);
+            
+            // Load HTML content
+            fetch('day2_2.html')
+                .then(response => {
+                    if (!response.ok) throw new Error("Failed to load combat statistics HTML");
+                    return response.text();
+                })
+                .then(html => {
+                    statisticsContainer.innerHTML = html;
+                    
+                    // Initialize toggle buttons directly
+                    initCombatStatButtons();
+                    
+                    // Load JS after HTML is loaded
+                    const script = document.createElement('script');
+                    script.src = 'day2_2.js';
+                    script.onerror = function() {
+                        console.error("Failed to load day2_2.js");
+                    };
+                    document.body.appendChild(script);
+                })
+                .catch(error => {
+                    console.error("Error loading combat statistics:", error);
+                    statisticsContainer.innerHTML = '<div style="padding:20px;color:#d5a26f;">Failed to load combat statistics</div>';
+                });
+        }
+        
+        // Direct initialization of combat statistics buttons
+        function initCombatStatButtons() {
+            console.log("Initializing combat statistics buttons directly");
+            const toggleButtons = document.querySelectorAll('.combat-dashboard .toggle-btn');
+            const dashboardViews = document.querySelectorAll('.combat-dashboard .dashboard-view');
+            
+            console.log(`Found ${toggleButtons.length} toggle buttons and ${dashboardViews.length} dashboard views`);
+            
+            if (toggleButtons.length && dashboardViews.length) {
+                toggleButtons.forEach(button => {
+                    button.addEventListener('click', function() {
+                        const targetView = this.getAttribute('data-view');
+                        console.log(`Combat toggle button clicked: ${targetView}`);
+                        
+                        // Update active button
+                        toggleButtons.forEach(btn => btn.classList.remove('active'));
+                        this.classList.add('active');
+                        
+                        // Show selected view
+                        dashboardViews.forEach(view => {
+                            view.classList.remove('active');
+                            if (view.id === targetView + '-view') {
+                                view.classList.add('active');
+                            }
+                        });
+                    });
+                });
+            }
+        }
+    });
+</script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const timelineContainer = document.getElementById('timeline-container');
+        if (!timelineContainer) return;
+        
+        console.log("Loading battle timeline...");
+        
+        // Load CSS first
+        if (!document.querySelector('link[href="day2_3.css"]')) {
+            const link = document.createElement('link');
+            link.rel = 'stylesheet';
+            link.href = 'day2_3.css';
+            document.head.appendChild(link);
+        }
+        
+        // Load HTML content
+        fetch('day2_3.html')
+            .then(response => {
+                if (!response.ok) throw new Error("Failed to load timeline HTML");
+                return response.text();
+            })
+            .then(html => {
+                timelineContainer.innerHTML = html;
+                
+                // Load Chart.js if needed for the timeline charts
+                if (typeof Chart === 'undefined') {
+                    const chartScript = document.createElement('script');
+                    chartScript.src = 'https://cdn.jsdelivr.net/npm/chart.js';
+                    document.head.appendChild(chartScript);
+                    
+                    chartScript.onload = function() {
+                        loadTimelineJS();
+                    };
+                } else {
+                    loadTimelineJS();
+                }
+            })
+            .catch(error => {
+                console.error("Error loading timeline:", error);
+                timelineContainer.innerHTML = '<div style="padding:20px;color:#d5a26f;">Failed to load battle timeline</div>';
+            });
+            
+        function loadTimelineJS() {
+            // Load JS after HTML is loaded
+            const script = document.createElement('script');
+            script.src = 'day2_3.js';
+            script.onerror = function() {
+                console.error("Failed to load day2_3.js");
+            };
+            
+            // Execute this after the script loads
+            script.onload = function() {
+                console.log("Timeline script loaded, initializing buttons");
+                
+                // Manually initialize timeline view buttons
+                const viewButtons = document.querySelectorAll('#timeline-container .view-btn');
+                const dashboardViews = document.querySelectorAll('#timeline-container .dashboard-view');
+                
+                console.log(`Found ${viewButtons.length} timeline view buttons`);
+                
+                viewButtons.forEach(button => {
+                    button.addEventListener('click', function() {
+                        const targetView = this.getAttribute('data-view');
+                        console.log(`Timeline button clicked: ${targetView}`);
+                        
+                        // Update active button
+                        viewButtons.forEach(btn => btn.classList.remove('active'));
+                        this.classList.add('active');
+                        
+                        // Show selected view
+                        dashboardViews.forEach(view => {
+                            view.classList.remove('active');
+                            if (view.id === targetView + '-view') {
+                                view.classList.add('active');
+                                
+                                // Initialize charts based on the active view
+                                if (targetView === 'intensity' && typeof initializeBattleIntensityChart === 'function') {
+                                    setTimeout(initializeBattleIntensityChart, 100);
+                                }
+                            }
+                        });
+                    });
+                });
+                
+                // Also initialize the timeline events for click behavior
+                const timeEvents = document.querySelectorAll('#timeline-container .time-event');
+                timeEvents.forEach(event => {
+                    event.addEventListener('click', function() {
+                        if (typeof openModal === 'function') {
+                            const time = this.getAttribute('data-time');
+                            const eventDesc = this.querySelector('.event-desc').textContent;
+                            openModal(time, eventDesc, '');
+                        }
+                    });
+                });
+            };
+            
+            document.body.appendChild(script);
+        }
+    });
+</script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const casualtiesContainer = document.getElementById('casualties-container');
+        if (!casualtiesContainer) return;
+        
+        console.log("Loading day 2 casualties dashboard...");
+        
+        // Load CSS first
+        if (!document.querySelector('link[href="day2_4.css"]')) {
+            const link = document.createElement('link');
+            link.rel = 'stylesheet';
+            link.href = 'day2_4.css';
+            document.head.appendChild(link);
+        }
+        
+        // Load HTML content
+        fetch('day2_4.html')
+            .then(response => {
+                if (!response.ok) throw new Error("Failed to load casualties HTML");
+                return response.text();
+            })
+            .then(html => {
+                casualtiesContainer.innerHTML = html;
+                
+                // Load Chart.js if needed
+                if (typeof Chart === 'undefined') {
+                    const chartScript = document.createElement('script');
+                    chartScript.src = 'https://cdn.jsdelivr.net/npm/chart.js';
+                    document.head.appendChild(chartScript);
+                    
+                    chartScript.onload = function() {
+                        loadCasualtiesJS();
+                    };
+                } else {
+                    loadCasualtiesJS();
+                }
+            })
+            .catch(error => {
+                console.error("Error loading casualties dashboard:", error);
+                casualtiesContainer.innerHTML = '<div style="padding:20px;color:#d5a26f;">Failed to load casualties breakdown</div>';
+            });
+            
+        function loadCasualtiesJS() {
+            // Load JS after HTML is loaded
+            const script = document.createElement('script');
+            script.src = 'day2_4.js';
+            script.onerror = function() {
+                console.error("Failed to load day2_4.js");
+            };
+            
+            // Execute this after the script loads
+            script.onload = function() {
+                console.log("Casualties script loaded, ensuring tab initialization");
+                
+                // Manually initialize tab buttons
+                const tabs = document.querySelectorAll('#casualties-container .view-tab');
+                const views = document.querySelectorAll('#casualties-container .dashboard-view');
+                
+                console.log(`Found ${tabs.length} casualty tab buttons`);
+                
+                tabs.forEach(tab => {
+                    tab.addEventListener('click', function() {
+                        // Update active tab
+                        tabs.forEach(t => t.classList.remove('active'));
+                        this.classList.add('active');
+                        
+                        // Show selected view
+                        const targetView = this.getAttribute('data-view');
+                        views.forEach(view => {
+                            view.classList.remove('active');
+                            if (view.id === targetView + '-view') {
+                                view.classList.add('active');
+                            }
+                        });
+                    });
+                });
+            };
+            
+            document.body.appendChild(script);
+        }
+    });
+</script>
+
+<script>
+// Fix chart rendering issues
+(function() {
+    console.log("Running chart fix script");
+    
+    // Wait until everything is loaded
+    setTimeout(function() {
+        console.log("Checking and fixing charts");
+        
+        // Check for Chart.js
+        if (typeof Chart === 'undefined') {
+            console.error("Chart.js is not loaded! Loading it now...");
+            const script = document.createElement('script');
+            script.src = 'https://cdn.jsdelivr.net/npm/chart.js';
+            document.head.appendChild(script);
+            
+            script.onload = initializeAllCharts;
+        } else {
+            initializeAllCharts();
+        }
+        
+        function initializeAllCharts() {
+            console.log("Initializing all charts");
+            
+            // Force reinitialize the combat chart
+            if (typeof initializeChart === 'function') {
+                initializeChart();
+            }
+            
+            // Force reinitialize the radar chart
+            if (typeof initializeRadarChart === 'function') {
+                initializeRadarChart();
+            }
+            
+            // Force redisplay of active view
+            const activeView = document.querySelector('.dashboard-view.active');
+            if (activeView) {
+                activeView.style.display = 'block';
+                activeView.style.opacity = '1';
+            }
+            
+            // Make sure the heatmap is colored
+            if (typeof initializeHeatmap === 'function') {
+                initializeHeatmap();
+            }
+            
+            // Animate comparison bars
+            if (typeof animateComparisonBars === 'function') {
+                animateComparisonBars();
+            }
+        }
+    }, 1000); // Give time for elements to load
+})();
+</script>
+
+<script>
+// Fix event modal interaction
+setTimeout(function() {
+    // Initialize event modal close button if exists
+    const closeModalBtn = document.querySelector('#event-modal .close-modal');
+    if (closeModalBtn) {
+        closeModalBtn.addEventListener('click', function() {
+            const modal = document.getElementById('event-modal');
+            if (modal) modal.style.display = 'none';
+        });
+        console.log("Event modal close button initialized");
+    }
+    
+    // Make sure the event modal is working
+    const modal = document.getElementById('event-modal');
+    if (modal) {
+        window.addEventListener('click', function(event) {
+            if (event.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
+    }
+}, 1500);
+</script>
+
+<script>
+// Force initialize the casualties chart
+setTimeout(function() {
+    console.log("Forcing casualties chart initialization");
+    
+    const casualtiesChart = document.getElementById('casualties-chart');
+    if (casualtiesChart && typeof Chart !== 'undefined') {
+        // Set explicit dimensions
+        casualtiesChart.style.height = '350px';
+        casualtiesChart.style.width = '100%';
+        
+        // Create chart with Day 2 casualty data
+        new Chart(casualtiesChart, {
+            type: 'bar',
+            data: {
+                labels: ['Chariots', 'Elephants', 'Cavalry', 'Infantry'],
+                datasets: [
+                    {
+                        label: 'Pandavas',
+                        data: [8000, 2000, 10000, 70000],
+                        backgroundColor: 'rgba(100, 149, 237, 0.7)',
+                        borderColor: 'rgba(100, 149, 237, 1)',
+                        borderWidth: 1
+                    },
+                    {
+                        label: 'Kauravas',
+                        data: [12500, 5000, 15000, 127500],
+                        backgroundColor: 'rgba(220, 20, 60, 0.7)',
+                        borderColor: 'rgba(220, 20, 60, 1)',
+                        borderWidth: 1
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    x: {
+                        grid: { display: false },
+                        ticks: { color: '#d5a26f' }
+                    },
+                    y: {
+                        beginAtZero: true,
+                        grid: { color: 'rgba(213, 162, 111, 0.1)' },
+                        ticks: {
+                            color: '#f5e6cc',
+                            callback: function(value) {
+                                if (value >= 1000) {
+                                    return (value / 1000) + 'k';
+                                }
+                                return value;
+                            }
+                        }
+                    }
+                }
+            }
+        });
+        
+        console.log("Casualties chart forced initialization complete");
+    }
+}, 2000);
+</script>
+
+</body>
+</html>

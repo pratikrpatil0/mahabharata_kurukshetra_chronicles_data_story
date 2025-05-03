@@ -1,0 +1,1999 @@
+/* Reset and base styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+    overflow-x: hidden;
+    font-family: 'Cinzel', serif;
+}
+
+/* Ancient background styling */
+body {
+    background: linear-gradient(to bottom, #2e1a14, #662417, #8c6239);
+    position: relative;
+    color: #f5e6cc;
+}
+
+/* Ancient texture overlay */
+body::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('https://www.transparenttextures.com/patterns/old-wall.png');
+    opacity: 0.3;
+    z-index: 1;
+}
+
+/* Video background container */
+.background-video-container {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 80%;
+    height: 80%;
+    transform: translate(-50%, -50%);
+    z-index: 0;
+    overflow: hidden;
+}
+
+.background-video {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    opacity: 0.6;
+}
+
+/* Blood overlay effect */
+.blood-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, transparent 50%, rgba(102, 36, 23, 0.4) 100%);
+    z-index: 2;
+    pointer-events: none;
+}
+
+/* Vignette effect */
+.vignette {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    box-shadow: inset 0 0 200px rgba(30, 10, 5, 0.8);
+    z-index: 3;
+    pointer-events: none;
+}
+
+/* BLOOD DRIP ANIMATIONS */
+
+/* Blood drips container */
+.blood-drip-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 4;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+/* Blood drips for full-length flow */
+.blood-drip {
+    position: absolute;
+    width: 4px;
+    background: linear-gradient(to bottom, #880000, #620000);
+    opacity: 0;
+    box-shadow: 0 0 8px rgba(136, 0, 0, 0.6);
+    transform-origin: top center;
+    border-radius: 0 0 2px 2px;
+    top: 0;
+    height: 0; /* Starting height is 0 */
+    transform: scaleY(1);
+    will-change: height, opacity; /* Performance optimization */
+}
+
+/* Multiple drips in different positions */
+.blood-drip:nth-child(1) {
+    left: 10%;
+    animation: fullBloodDrip 20s infinite;
+    animation-delay: 1s;
+}
+
+.blood-drip:nth-child(2) {
+    left: 25%;
+    animation: fullBloodDrip 22s infinite;
+    animation-delay: 4s;
+}
+
+.blood-drip:nth-child(3) {
+    left: 40%;
+    animation: fullBloodDrip 18s infinite;
+    animation-delay: 2s;
+}
+
+.blood-drip:nth-child(4) {
+    left: 55%;
+    animation: fullBloodDrip 24s infinite;
+    animation-delay: 5s;
+}
+
+.blood-drip:nth-child(5) {
+    left: 70%;
+    animation: fullBloodDrip 21s infinite;
+    animation-delay: 3s;
+}
+
+.blood-drip:nth-child(6) {
+    left: 85%;
+    animation: fullBloodDrip 23s infinite;
+    animation-delay: 0s;
+}
+
+.blood-drip:nth-child(7) {
+    left: 32%;
+    animation: fullBloodDrip 25s infinite;
+    animation-delay: 6s;
+}
+
+.blood-drip:nth-child(8) {
+    left: 78%;
+    animation: fullBloodDrip 19s infinite;
+    animation-delay: 7s;
+}
+
+/* Extra drips for more coverage */
+.blood-drip:nth-child(9) {
+    left: 5%;
+    animation: fullBloodDrip 21s infinite;
+    animation-delay: 8s;
+}
+
+.blood-drip:nth-child(10) {
+    left: 17%;
+    animation: fullBloodDrip 23s infinite;
+    animation-delay: 2.5s;
+}
+
+.blood-drip:nth-child(11) {
+    left: 63%;
+    animation: fullBloodDrip 20s infinite;
+    animation-delay: 9s;
+}
+
+.blood-drip:nth-child(12) {
+    left: 92%;
+    animation: fullBloodDrip 24s infinite;
+    animation-delay: 4.5s;
+}
+
+/* Blood spatter - tiny dots */
+.blood-spatter-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 4;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.blood-spatter {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image: radial-gradient(circle, #880000 1px, transparent 1px),
+                     radial-gradient(circle, #880000 2px, transparent 2px),
+                     radial-gradient(circle, #880000 1px, transparent 1px),
+                     radial-gradient(circle, #880000 3px, transparent 3px);
+    background-size: 300px 300px;
+    background-position: 0 0, 100px 50px, 200px 150px, 60px 180px;
+    opacity: 0;
+    animation: bloodSpatter 15s infinite;
+    animation-delay: 5s;
+}
+
+/* Blood pulse effect */
+.blood-pulse {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(136, 0, 0, 0);
+    z-index: 5;
+    pointer-events: none;
+    animation: bloodPulse 15s infinite;
+}
+
+/* Animation for full-length blood drips */
+@keyframes fullBloodDrip {
+    0%, 95%, 100% { 
+        opacity: 0; 
+        height: 0; 
+    }
+    1%, 3% { 
+        opacity: 0.9; 
+        height: 0; 
+    }
+    10% { 
+        opacity: 0.9; 
+        height: 100vh; 
+    }
+    40% { 
+        opacity: 0.9; 
+        height: 100vh; 
+    }
+    70% { 
+        opacity: 0; 
+        height: 100vh; 
+    }
+}
+
+/* Other animation keyframes */
+@keyframes bloodSpatter {
+    0%, 85%, 100% { opacity: 0; }
+    1%, 5% { opacity: 0.7; }
+    25% { opacity: 0.5; }
+    50% { opacity: 0; }
+}
+
+@keyframes bloodPulse {
+    0%, 85%, 100% { background-color: rgba(136, 0, 0, 0); }
+    86%, 88% { background-color: rgba(136, 0, 0, 0.3); }
+    90% { background-color: rgba(136, 0, 0, 0); }
+}
+
+/* Blood drops/splashes along the drips */
+.blood-drip::after {
+    content: '';
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    background: #880000;
+    border-radius: 50%;
+    left: -1px;
+    opacity: 0;
+    box-shadow: 0 0 5px rgba(136, 0, 0, 0.6);
+}
+
+.blood-drip:nth-child(odd)::after {
+    top: 30%;
+    animation: dropSplash 19s infinite;
+    animation-delay: inherit;
+}
+
+.blood-drip:nth-child(even)::after {
+    top: 70%;
+    animation: dropSplash 17s infinite;
+    animation-delay: calc(inherit + 2s);
+}
+
+/* Additional drops in middle section */
+.blood-drip::before {
+    content: '';
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background: #880000;
+    border-radius: 50%;
+    left: -2px;
+    top: 50%;
+    opacity: 0;
+    box-shadow: 0 0 8px rgba(136, 0, 0, 0.7);
+    animation: dropSplash 23s infinite;
+    animation-delay: calc(inherit + 5s);
+}
+
+@keyframes dropSplash {
+    0%, 97%, 100% { 
+        opacity: 0; 
+        transform: translate(0, 0); 
+    }
+    98% { 
+        opacity: 1; 
+        transform: translate(1px, 0) scale(1.5); 
+    }
+    99% { 
+        opacity: 0; 
+        transform: translate(2px, 3px) scale(1);
+    }
+}
+
+/* Updated Page Title styling - similar to day1.html */
+.page-title {
+    position: relative;
+    top: auto;
+    left: auto;
+    transform: none;
+    margin-top: 20px;
+    padding-top: 10px;
+    text-align: center;
+    z-index: 10;
+    color: #d5a26f;
+    font-family: 'Cinzel', serif;
+    font-weight: 900;
+    font-size: 3rem; /* Reduced from 4rem to 3rem */
+    text-shadow: 0 0 20px rgba(0, 0, 0, 0.8), 
+                0 0 15px rgba(102, 36, 23, 0.5),
+                4px 4px 7px rgba(0, 0, 0, 0.6);
+}
+
+.page-subtitle {
+    position: relative;
+    top: auto;
+    left: auto;
+    transform: none;
+    margin-bottom: 5rem; /* Increased from 3rem to 5rem for much more space */
+    text-align: center;
+    z-index: 10;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1.5rem;
+    color: #f5e6cc;
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.7),
+                2px 2px 4px rgba(0, 0, 0, 0.5);
+    max-width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* NAVIGATION BAR STYLES */
+.navbar {
+    background-color: rgba(46, 26, 20, 0.95);
+    color: #d5a26f;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 8px 40px 8px 150px;
+    border-bottom: 1px solid #662417;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 990;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+    height: 50px;
+}
+
+/* Ribbon-style logo container */
+.logo-container {
+    background: linear-gradient(to bottom, #8c6239, #662417);
+    position: fixed;
+    top: 0;
+    left: 20px;
+    z-index: 1000;
+    height: 120px;
+    width: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    clip-path: polygon(0% 0%, 100% 0%, 100% 70%, 50% 100%, 0% 70%);
+    filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.6));
+    border: 1px solid #d5a26f;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    text-decoration: none;
+}
+
+.logo-container:hover {
+    transform: scale(1.05);
+}
+
+/* Ribbon tails */
+.logo-container::before,
+.logo-container::after {
+    content: '';
+    position: absolute;
+    bottom: -20px;
+    width: 20px;
+    height: 40px;
+    background: #662417;
+    z-index: -1;
+}
+
+.logo-container::before {
+    left: 20px;
+    transform: skewY(40deg);
+    box-shadow: -2px 2px 3px rgba(0, 0, 0, 0.3);
+}
+
+.logo-container::after {
+    right: 20px;
+    transform: skewY(-40deg);
+    box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.3);
+}
+
+/* Logo */
+.logo {
+    height: 75px;
+    filter: brightness(1.2) drop-shadow(0 2px 3px rgba(0, 0, 0, 0.5));
+}
+
+/* Navigation links */
+.nav-links {
+    display: flex;
+    gap: 25px;
+}
+
+.nav-links a {
+    color: #d5a26f;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 14px;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+    position: relative;
+    padding: 5px 0;
+    text-transform: uppercase;
+}
+
+.nav-links a:hover {
+    color: #f5e6cc;
+}
+
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(to right, #8c6239, #d5a26f, #8c6239);
+    transition: width 0.3s ease;
+}
+
+.nav-links a:hover::after {
+    width: 100%;
+}
+
+/* Decorative border at bottom of navbar */
+.navbar::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -3px;
+    width: 100%;
+    height: 3px;
+    background-image: repeating-linear-gradient(45deg, transparent, transparent 3px, rgba(213, 162, 111, 0.2) 3px, rgba(213, 162, 111, 0.2) 6px);
+}
+
+/* INTRO & CONTENT SECTIONS */
+.intro-section {
+    height: auto;
+    padding-top: 60px; /* reduced to be closer to navbar */
+    padding-bottom: 10px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* Changed from center to flex-start */
+    align-items: center;
+    z-index: 10;
+}
+
+.content-container {
+    padding-top: 0;
+    position: relative;
+    z-index: 50;
+    margin-left: 0;
+}
+
+.content-section {
+    max-width: 1200px;
+    margin: 0 auto 3.5rem; /* increased bottom margin */
+    padding: 2rem 2rem 3rem;
+    position: relative;
+    border-bottom: 1px solid rgba(213, 162, 111, 0.3);
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.section-title {
+    font-family: 'Cinzel', serif;
+    font-size: 2.5rem;
+    color: #d5a26f;
+    text-align: center;
+    margin-bottom: 2rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    position: relative;
+    z-index: 10;
+}
+
+.section-subtitle {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem;
+    font-style: italic;
+    color: #f5e6cc;
+    text-align: center;
+    margin-bottom: 2rem;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
+    position: relative;
+    z-index: 10;
+}
+
+/* Card styles */
+.card {
+    background: linear-gradient(135deg, rgba(46, 26, 20, 0.9), rgba(102, 36, 23, 0.8));
+    border: 1px solid rgba(213, 162, 111, 0.4);
+    border-radius: 6px;
+    margin-bottom: 2rem;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+}
+
+.card-title {
+    font-family: 'Cinzel', serif;
+    font-size: 1.6rem;
+    color: #d5a26f;
+    padding: 1.2rem 1.5rem;
+    border-bottom: 1px solid rgba(213, 162, 111, 0.3);
+    background: rgba(46, 26, 20, 0.6);
+}
+
+.card-content {
+    padding: 1.5rem;
+}
+
+/* Two-column grid */
+.grid-2cols {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+}
+
+@media screen and (max-width: 768px) {
+    .grid-2cols {
+        grid-template-columns: 1fr;
+    }
+}
+
+.grid-item {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+    color: #f5e6cc;
+}
+
+.grid-item strong {
+    color: #d5a26f;
+    font-family: 'Cinzel', serif;
+    font-weight: 600;
+}
+
+/* Chart containers */
+.chart-container {
+    margin: 1rem 0;
+    border: 1px solid rgba(213, 162, 111, 0.3);
+    border-radius: 6px;
+    padding: 1rem;
+    background: rgba(46, 26, 20, 0.3);
+    width: 100%;
+    height: 300px;
+    position: relative;
+}
+
+/* Formation visualizations */
+.formation-container {
+    display: flex;
+    justify-content: space-around;
+    margin: 3rem 0;
+    flex-wrap: wrap;
+    gap: 2rem;
+}
+
+.formation {
+    text-align: center;
+    padding: 1.5rem;
+    max-width: 400px;
+}
+
+.formation-title {
+    font-family: 'Cinzel', serif;
+    font-size: 1.5rem;
+    color: #d5a26f;
+    margin-bottom: 1rem;
+}
+
+.formation-image {
+    width: 100%;
+    max-width: 300px;
+    height: auto;
+    margin-bottom: 1.5rem;
+    border-radius: 6px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.formation-description {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem;
+    color: #f5e6cc;
+}
+
+/* Formation Visualization Styles */
+.formation-visual {
+    height: 220px;
+    border: 1px solid rgba(213, 162, 111, 0.4);
+    border-radius: 8px;
+    margin: 1rem auto;
+    position: relative;
+    background: rgba(46, 26, 20, 0.3);
+    overflow: hidden;
+}
+
+/* Command Structure Cards */
+.command-cards {
+    display: flex;
+    justify-content: space-around;
+    gap: 2rem;
+    margin: 1rem 0;
+}
+
+.command-card {
+    flex: 1;
+    padding: 1.5rem;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+}
+
+.command-card:hover {
+    transform: translateY(-5px);
+}
+
+.pandava-command {
+    background: linear-gradient(135deg, rgba(46, 26, 20, 0.8), rgba(75, 156, 211, 0.3));
+    border: 1px solid rgba(75, 156, 211, 0.5);
+}
+
+.kaurava-command {
+    background: linear-gradient(135deg, rgba(46, 26, 20, 0.8), rgba(201, 76, 76, 0.3));
+    border: 1px solid rgba(201, 76, 76, 0.5);
+}
+
+.command-army {
+    font-family: 'Cinzel', serif;
+    font-size: 1rem;
+    color: #d5a26f;
+    margin-bottom: 0.5rem;
+}
+
+.command-leader {
+    font-family: 'Cinzel', serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #f5e6cc;
+    margin-bottom: 0.5rem;
+}
+
+.command-note {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem;
+    font-style: italic;
+    color: rgba(245, 230, 204, 0.8);
+}
+
+.command-icon {
+    font-size: 2.5rem;
+    margin-top: 1rem;
+    opacity: 0.8;
+}
+
+/* Strategic Order Styling */
+.strategic-order-container {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 2rem;
+}
+
+.strategic-order-content {
+    flex: 1;
+    min-width: 280px;
+    text-align: center;
+    padding: 1.5rem;
+}
+
+.strategic-order-visualization {
+    flex: 1;
+    min-width: 300px;
+    height: 220px;
+}
+
+.strategic-order-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    color: #d5a26f;
+}
+
+.strategic-quote {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem;
+    font-style: italic;
+    color: #f5e6cc;
+    margin-bottom: 1rem;
+    line-height: 1.4;
+}
+
+.strategic-attribution {
+    font-family: 'Cinzel', serif;
+    font-size: 1rem;
+    color: #d5a26f;
+    text-align: right;
+    padding-right: 2rem;
+}
+
+@media screen and (max-width: 768px) {
+    .command-cards {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .strategic-order-container {
+        flex-direction: column;
+    }
+}
+
+/* Summary section */
+.summary-container {
+    background: linear-gradient(135deg, rgba(46, 26, 20, 0.9), rgba(102, 36, 23, 0.8));
+    border: 2px solid rgba(213, 162, 111, 0.6);
+    border-radius: 8px;
+    padding: 2rem;
+    margin: 3rem 0;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+}
+
+.summary-title {
+    font-family: 'Cinzel', serif;
+    font-size: 2rem;
+    color: #d5a26f;
+    text-align: center;
+    margin-bottom: 1.5rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.summary-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.summary-item {
+    position: relative;
+    padding: 0 0 0 2rem;
+    margin-bottom: 1rem;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem;
+    color: #f5e6cc;
+}
+
+.summary-item::before {
+    content: '⚔️';
+    position: absolute;
+    left: 0;
+    top: 0.2rem;
+    font-size: 1rem;
+}
+
+/* Back to top button */
+.back-to-top {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    background: linear-gradient(to right, #662417, #8c6239);
+    color: #f5e6cc;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(213, 162, 111, 0.5);
+    cursor: pointer;
+    z-index: 100;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.back-to-top.visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+.back-to-top:hover {
+    transform: scale(1.1);
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 3rem 0;
+    font-family: 'Cinzel', serif;
+    font-size: 0.9rem;
+    color: rgba(245, 230, 204, 0.7);
+    border-top: 1px solid rgba(213, 162, 111, 0.3);
+}
+
+/* Side panel navigation menu */
+.side-panel {
+    position: fixed;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    background: rgba(46, 26, 20, 0.95);
+    border-right: 1px solid #662417;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    width: 250px;
+    height: auto;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.side-panel-header {
+    text-align: center;
+    font-family: 'Cinzel', serif;
+    font-size: 1.5rem;
+    color: #d5a26f;
+    border-bottom: 1px solid rgba(213, 162, 111, 0.3);
+    padding-bottom: 0.5rem;
+}
+
+.side-panel-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.side-panel-nav a {
+    color: #d5a26f;
+    text-decoration: none;
+    font-family: 'Cinzel', serif;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: color 0.3s ease;
+}
+
+.side-panel-nav a:hover {
+    color: #f5e6cc;
+}
+
+.section-icon {
+    font-size: 1.2rem;
+}
+
+/* Side Panel Menu */
+.side-panel {
+    position: fixed;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    width: 60px;
+    background: rgba(46, 26, 20, 0.85);
+    border-radius: 0 10px 10px 0;
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.5);
+    z-index: 980;
+    overflow: hidden;
+    transition: width 0.3s ease;
+    border-right: 1px solid rgba(213, 162, 111, 0.4);
+    border-top: 1px solid rgba(213, 162, 111, 0.4);
+    border-bottom: 1px solid rgba(213, 162, 111, 0.4);
+}
+
+.side-panel:hover {
+    width: 200px;
+}
+
+.side-panel-header {
+    padding: 15px 0;
+    text-align: center;
+    border-bottom: 1px solid rgba(213, 162, 111, 0.3);
+}
+
+.side-panel-header h3 {
+    font-family: 'Cinzel', serif;
+    font-size: 0.9rem;
+    color: #d5a26f;
+    white-space: nowrap;
+}
+
+.side-panel-nav {
+    display: flex;
+    flex-direction: column;
+    padding: 10px 0;
+}
+
+.side-panel-nav a {
+    display: flex;
+    align-items: center;
+    padding: 10px 15px;
+    text-decoration: none;
+    color: #f5e6cc;
+    transition: background 0.2s ease;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.side-panel-nav a:hover {
+    background: rgba(213, 162, 111, 0.2);
+}
+
+.section-icon {
+    min-width: 30px;
+    font-style: normal;
+    font-size: 1.1rem;
+}
+
+.side-panel-nav a span {
+    margin-left: 10px;
+    opacity: 0.9;
+    font-size: 0.9rem;
+}
+
+/* Adjust content to make room for side panel */
+.content-container {
+    margin-left: 0;
+}
+
+/* Responsive adjustments */
+@media screen and (max-width: 768px) {
+    .side-panel {
+        width: 45px;
+    }
+    
+    .content-container {
+        margin-left: 45px;
+    }
+}
+
+/* Create dialogue boxes for section descriptions */
+.section-dialogue {
+    background: linear-gradient(135deg, rgba(102, 36, 23, 0.9), rgba(46, 26, 20, 0.95));
+    border: 2px solid rgba(213, 162, 111, 0.6);
+    border-radius: 10px;
+    padding: 1.5rem;
+    margin: 2rem auto;
+    max-width: 85%;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
+    position: relative;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem;
+    color: #f5e6cc;
+    line-height: 1.6;
+    z-index: 10;
+    transform: translateY(0);
+    animation: floatEffect 6s infinite ease-in-out;
+}
+
+.section-dialogue::before {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-left: 15px solid transparent;
+    border-right: 15px solid transparent;
+    border-bottom: 15px solid rgba(102, 36, 23, 0.9);
+    top: -15px;
+    left: 50px;
+}
+
+.dialogue-header {
+    border-bottom: 1px solid rgba(213, 162, 111, 0.4);
+    margin-bottom: 1rem;
+    padding-bottom: 0.7rem;
+    display: flex;
+    align-items: center;
+}
+
+.dialogue-icon {
+    font-size: 1.5rem;
+    margin-right: 0.8rem;
+}
+
+.dialogue-title {
+    font-family: 'Cinzel', serif;
+    font-size: 1.3rem;
+    color: #d5a26f;
+    font-weight: 700;
+}
+
+.dialogue-footer {
+    text-align: center;
+    margin-top: 1rem;
+    opacity: 0.7;
+    animation: pulseEffect 2s infinite;
+}
+
+.scroll-icon {
+    font-size: 1.2rem;
+}
+
+@keyframes floatEffect {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
+}
+
+@keyframes pulseEffect {
+    0%, 100% { opacity: 0.4; }
+    50% { opacity: 0.8; }
+}
+
+/* Add icon bullets for narrative points */
+.icon-list {
+    list-style: none;
+    padding: 0;
+    margin: 1.5rem 0;
+}
+
+.icon-list li {
+    padding-left: 2rem;
+    position: relative;
+    margin-bottom: 1rem;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.15rem;
+}
+
+.icon-list li::before {
+    position: absolute;
+    left: 0;
+    top: 0.2rem;
+}
+
+.icon-list.weapon-list li:nth-child(1)::before { content: '🏹'; }
+.icon-list.weapon-list li:nth-child(2)::before { content: '⚔️'; }
+.icon-list.weapon-list li:nth-child(3)::before { content: '🔱'; }
+.icon-list.weapon-list li:nth-child(4)::before { content: '🪓'; }
+
+/* Improved chart layouts */
+.chart-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+    margin: 2rem 0;
+}
+
+/* Better section spacing */
+.content-section {
+    max-width: 1200px;
+    margin: 0 auto 3.5rem; /* increased bottom margin */
+    padding: 2rem 2rem 3rem;
+    position: relative;
+    border-bottom: 1px solid rgba(213, 162, 111, 0.3);
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Improved data point boxes */
+.data-box {
+    background: linear-gradient(135deg, rgba(140, 98, 57, 0.7), rgba(102, 36, 23, 0.7));
+    border: 1px solid rgba(213, 162, 111, 0.3);
+    border-radius: 8px;
+    padding: 1rem;
+    text-align: center;
+    margin: 1rem 0;
+}
+
+.data-box-title {
+    font-family: 'Cinzel', serif;
+    color: #d5a26f;
+    margin-bottom: 0.5rem;
+    font-size: 1.1rem;
+}
+
+.data-box-value {
+    font-family: 'Cinzel', serif;
+    color: #f5e6cc;
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.data-box-subtitle {
+    font-family: 'Cormorant Garamond', serif;
+    color: #d5a26f;
+    font-size: 0.9rem;
+    font-style: italic;
+}
+
+/* Improved data grid */
+.data-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+    margin: 2rem 0;
+}
+
+@media screen and (max-width: 992px) {
+    .data-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .data-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Battlefield Dashboard */
+.battlefield-dashboard {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    width: 90%;
+    max-width: 1200px;
+    margin-top: 4rem; /* Increased space above dashboard */
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 3rem; /* Added more space below dashboard too */
+    position: relative;
+    z-index: 100;
+}
+
+/* Make certain cards span multiple columns */
+.time-card, .weather-card, .casualties-card {
+    grid-column: span 3;
+}
+
+.battle-timeline-card {
+    grid-column: span 3;
+}
+
+.weather-card, .casualties-card {
+    grid-column: span 3;
+}
+
+@media (min-width: 768px) {
+    .casualties-card {
+        grid-column: span 2;
+    }
+    .weather-card {
+        grid-column: span 1;
+    }
+}
+
+/* Timeline styling */
+.battle-timeline-card {
+    padding: 0.5rem !important;
+}
+
+.battle-timeline {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0.5rem 0;
+    position: relative;
+}
+
+/* Battle Info Cards */
+.battle-info-card {
+    background: linear-gradient(135deg, rgba(46, 26, 20, 0.85), rgba(102, 36, 23, 0.85));
+    border: 1px solid rgba(213, 162, 111, 0.5);
+    border-radius: 10px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    animation: fadeInUp 0.8s ease both;
+    animation-fill-mode: backwards;
+}
+
+.battle-info-card:nth-child(1) { animation-delay: 0.2s; }
+.battle-info-card:nth-child(2) { animation-delay: 0.4s; }
+.battle-info-card:nth-child(3) { animation-delay: 0.6s; }
+.battle-info-card:nth-child(4) { animation-delay: 0.8s; }
+.battle-info-card:nth-child(5) { animation-delay: 1.0s; }
+
+.battle-info-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 20px rgba(0, 0, 0, 0.5);
+}
+
+.battle-info-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 5px;
+    background: linear-gradient(to right, #4B9CD3, #d5a26f, #C94C4C);
+}
+
+/* Card Header and Content */
+.card-icon {
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.emoji-icon {
+    font-size: 2.5rem;
+    filter: drop-shadow(0 3px 5px rgba(0, 0, 0, 0.3));
+}
+
+.emoji-icon-small {
+    font-size: 1.2rem;
+    vertical-align: middle;
+}
+
+.card-content {
+    flex: 1;
+}
+
+.card-content h3 {
+    font-family: 'Cinzel', serif;
+    font-size: 1.2rem;
+    color: #d5a26f;
+    margin-bottom: 0.5rem;
+    text-align: center;
+}
+
+.data-value {
+    font-family: 'Cinzel', serif;
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: #f5e6cc;
+    text-align: center;
+    margin: 0.5rem 0;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+.data-subtitle {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem;
+    font-style: italic;
+    color: rgba(245, 230, 204, 0.8);
+    text-align: center;
+}
+
+/* Battle Timeline */
+.battle-timeline {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 1.5rem 0;
+    position: relative;
+}
+
+.timeline-marker {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    z-index: 2;
+}
+
+.time-icon {
+    font-size: 1.8rem;
+    margin-bottom: 0.3rem;
+}
+
+.time-label {
+    font-family: 'Cinzel', serif;
+    font-size: 0.9rem;
+    color: #d5a26f;
+}
+
+.timeline-bar {
+    height: 4px;
+    background: linear-gradient(to right, rgba(75, 156, 211, 0.7), rgba(201, 76, 76, 0.7));
+    flex: 1;
+    margin: 0 1rem;
+    position: relative;
+    border-radius: 2px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.timeline-bar::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: -3px;
+    height: 10px;
+    width: 100%;
+    background: repeating-linear-gradient(
+        90deg,
+        transparent,
+        transparent 1rem,
+        rgba(213, 162, 111, 0.5) 1rem,
+        rgba(213, 162, 111, 0.5) 2rem
+    );
+    opacity: 0.3;
+    border-radius: 5px;
+}
+
+/* Weather Timeline */
+.weather-timeline {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    margin: 1rem 0;
+}
+
+.weather-condition {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 0.5rem;
+}
+
+.weather-icon {
+    font-size: 1.8rem;
+    margin-bottom: 0.3rem;
+    filter: drop-shadow(0 3px 5px rgba(0, 0, 0, 0.3));
+}
+
+.weather-label {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.9rem;
+    color: #d5a26f;
+    text-align: center;
+}
+
+/* Casualties Chart */
+.casualties-chart-container {
+    position: relative;
+    height: 200px;
+    margin: 1rem auto;
+}
+
+.casualties-counter {
+    font-size: 2.8rem;
+}
+
+.casualties-labels {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 1rem;
+}
+
+.casualties-label {
+    display: flex;
+    align-items: center;
+    font-family: 'Cinzel', serif;
+}
+
+.dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    margin-right: 0.5rem;
+}
+
+.pandava-dot {
+    background-color: #4B9CD3;
+    box-shadow: 0 0 8px rgba(75, 156, 211, 0.7);
+}
+
+.kaurava-dot {
+    background-color: #C94C4C;
+    box-shadow: 0 0 8px rgba(201, 76, 76, 0.7);
+}
+
+.label-text {
+    font-size: 0.9rem;
+    color: #f5e6cc;
+}
+
+/* Animation for cards */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive adjustments */
+@media screen and (max-width: 992px) {
+    .battlefield-dashboard {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .battlefield-dashboard {
+        grid-template-columns: 1fr;
+    }
+    
+    .time-card, .weather-card, .casualties-card {
+        grid-column: span 1;
+    }
+}
+
+/* Large dialogue box that contains an entire section */
+.large-dialogue {
+    background: linear-gradient(135deg, rgba(102, 36, 23, 0.95), rgba(46, 26, 20, 0.97));
+    border: 2px solid rgba(213, 162, 111, 0.7);
+    border-radius: 12px;
+    padding: 3.5rem; /* Increased padding for more space */
+    margin: 2rem auto;
+    width: 98%; /* Increased width to use more screen space */
+    max-width: 1400px; /* Added max-width */
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8); /* Enhanced shadow */
+    z-index: 50; /* Higher z-index to place above blood animations */
+}
+
+/* Intro paragraph styling within the dialogue */
+.dialogue-intro {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem;
+    color: #f5e6cc;
+    line-height: 1.6;
+    margin-bottom: 2rem;
+    text-align: center;
+    font-style: italic;
+    max-width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Adjust dashboard elements inside the dialogue */
+.large-dialogue .analytics-dashboard {
+    margin-top: 3rem;
+}
+
+.large-dialogue .dashboard-card {
+    background: rgba(46, 26, 20, 0.7);
+}
+
+/* Create a subtle border to separate sections inside the dialogue */
+.large-dialogue .formation-container {
+    border-bottom: 1px solid rgba(213, 162, 111, 0.3);
+    padding-bottom: 2rem;
+    margin-bottom: 2rem;
+}
+
+/* Add proper spacing between dashboard sections */
+.dashboard-row {
+    margin-bottom: 2.5rem;
+}
+
+/* Create distinct separation between major sections */
+.dashboard-row-separated {
+    margin-top: 4rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(213, 162, 111, 0.3);
+    position: relative;
+}
+
+/* Add decorative element to section separators */
+.dashboard-row-separated::before {
+    content: '';
+    position: absolute;
+    top: -1px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 30%;
+    height: 2px;
+    background: linear-gradient(to right, transparent, #d5a26f, transparent);
+}
+
+/* Enhanced key insight boxes */
+.card-footer {
+    margin-top: 1.5rem;
+    padding: 1.2rem;
+    background: rgba(140, 98, 57, 0.2);
+    border-radius: 6px;
+    border-left: 4px solid #d5a26f;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+}
+
+.card-footer:hover {
+    background: rgba(140, 98, 57, 0.3);
+    transform: translateY(-2px);
+}
+
+.insight-tag {
+    display: inline-block;
+    background: linear-gradient(135deg, #8c6239, #662417);
+    color: #f5e6cc;
+    padding: 0.4rem 0.9rem;
+    border-radius: 4px;
+    font-family: 'Cinzel', serif;
+    font-size: 0.9rem;
+    margin-right: 0.5rem;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+.card-footer p {
+    margin: 0.5rem 0 0;
+    line-height: 1.4;
+}
+
+/* Weapons Counter Section Styling */
+.weapons-counter-container {
+    margin: 2rem 0 3rem;
+}
+
+.weapons-intro {
+    max-width: 80%;
+    margin: 0 auto 2rem;
+    text-align: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem;
+    font-style: italic;
+    color: #f5e6cc;
+    line-height: 1.6;
+}
+
+.counter-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+    margin: 2rem 0;
+}
+
+@media (max-width: 992px) {
+    .counter-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 576px) {
+    .counter-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.counter-box {
+    background: linear-gradient(135deg, rgba(102, 36, 23, 0.7), rgba(46, 26, 20, 0.8));
+    border: 1px solid rgba(213, 162, 111, 0.5);
+    border-radius: 10px;
+    padding: 2rem 1rem;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+    transition: transform 0.3s ease;
+    cursor: pointer;
+}
+
+.counter-box:hover {
+    transform: translateY(-5px) scale(1.03);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.5);
+}
+
+.counter-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    filter: drop-shadow(0 3px 5px rgba(0, 0, 0, 0.3));
+}
+
+.counter-value {
+    font-family: 'Cinzel', serif;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #f5e6cc;
+    margin: 0.5rem 0;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+.counter-label {
+    font-family: 'Cinzel', serif;
+    font-size: 1.1rem;
+    color: #d5a26f;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Analytics Section Title */
+.analytics-section-title {
+    font-family: 'Cinzel', serif;
+    font-size: 1.8rem;
+    color: #d5a26f;
+    text-align: center;
+    margin-bottom: 2rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+/* Force Distribution Visual */
+.force-distribution-container {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    margin: 2rem 0;
+}
+
+.force-category {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.force-icon {
+    font-size: 2rem;
+    width: 50px;
+    text-align: center;
+}
+
+.force-bar-container {
+    flex: 1;
+    height: 40px;
+    background: rgba(46, 26, 20, 0.5);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(213, 162, 111, 0.3);
+}
+
+.force-bar {
+    height: 100%;
+    width: 0;
+    border-radius: 20px;
+    position: relative;
+    transition: width 2s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.force-bar::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: repeating-linear-gradient(
+        45deg,
+        rgba(255, 255, 255, 0.1),
+        rgba(255, 255, 255, 0.1) 10px,
+        transparent 10px,
+        transparent 20px
+    );
+}
+
+.elephant-bar {
+    background: linear-gradient(to right, #4B9CD3, #764ABC);
+    width: 2%;
+}
+
+.horse-bar {
+    background: linear-gradient(to right, #D3824B, #BC764A);
+    width: 17.3%;
+}
+
+.chariot-bar {
+    background: linear-gradient(to right, #4BD3A3, #4ABC76);
+    width: 5.5%;
+}
+
+.infantry-bar {
+    background: linear-gradient(to right, #D34B4B, #BC4A76);
+    width: 100%;
+}
+
+/* Force bars to show immediately */
+.elephant-bar { width: 2%; }
+.horse-bar { width: 17.3%; }
+.chariot-bar { width: 5.5%; }
+.infantry-bar { width: 100%; }
+
+.force-label {
+    font-family: 'Cinzel', serif;
+    font-size: 1.1rem;
+    color: #d5a26f;
+    width: 100px;
+}
+
+.force-count {
+    font-family: 'Cinzel', serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #f5e6cc;
+    width: 120px;
+    text-align: right;
+}
+
+/* BATTLE TIMELINE VISUALIZATION STYLES */
+.timeline-visualization {
+    position: relative;
+    width: 100%;
+    height: 500px;
+    margin: 2rem 0 3rem;
+}
+
+.sun-track {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 80px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.sun, .moon {
+    font-size: 2.5rem;
+    filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.6));
+}
+
+.sun {
+    transform: translateX(0%);
+    transition: transform 1s ease;
+}
+
+.moon {
+    opacity: 0.5;
+}
+
+.timeline-track {
+    position: relative;
+    width: 100%;
+    height: 100px;
+    margin-top: 20px;
+}
+
+.timeline-line {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    height: 6px;
+    background: linear-gradient(to right, rgba(213, 162, 111, 0.3), #d5a26f, rgba(213, 162, 111, 0.3));
+    transform: translateY(-50%);
+    border-radius: 3px;
+    box-shadow: 0 0 15px rgba(213, 162, 111, 0.5);
+}
+
+.timeline-events {
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.timeline-event {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: radial-gradient(#d5a26f, #8c6239);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    cursor: pointer;
+    z-index: 2;
+    box-shadow: 0 0 0 4px rgba(46, 26, 20, 0.8), 0 0 15px rgba(213, 162, 111, 0.7);
+    transition: all 0.3s ease;
+}
+
+.timeline-event:hover, .timeline-event.active {
+    transform: translateY(-50%) scale(1.2);
+    box-shadow: 0 0 0 4px rgba(46, 26, 20, 0.8), 0 0 20px rgba(213, 162, 111, 0.9);
+}
+
+.timeline-event-time {
+    position: absolute;
+    bottom: -35px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: 'Cinzel', serif;
+    font-size: 0.9rem;
+    color: #d5a26f;
+    white-space: nowrap;
+}
+
+.timeline-details {
+    margin-top: 60px;
+    position: relative;
+    height: 300px;
+    overflow: hidden;
+}
+
+.timeline-detail-container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.5s ease, visibility 0.5s;
+    display: flex;
+    flex-direction: column;
+}
+
+.timeline-detail-container.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.timeline-detail-time {
+    font-family: 'Cinzel', serif;
+    font-size: 1.5rem;
+    color: #d5a26f;
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+}
+
+.timeline-icon {
+    margin-right: 0.8rem;
+    font-style: normal;
+    font-size: 1.8rem;
+}
+
+.timeline-detail-title {
+    font-family: 'Cinzel', serif;
+    font-size: 2rem;
+    color: #f5e6cc;
+    margin-bottom: 1rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.timeline-detail-content {
+    display: flex;
+    gap: 2rem;
+}
+
+.timeline-detail-visual {
+    flex: 1;
+    min-width: 300px;
+    height: 200px;
+    border: 1px solid rgba(213, 162, 111, 0.3);
+    border-radius: 8px;
+    overflow: hidden;
+    background: rgba(46, 26, 20, 0.3);
+    position: relative;
+    box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Battle illustrations and animations fix */
+.battle-illustration {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    background: rgba(46, 26, 20, 0.3);
+}
+
+.conch-icon {
+    font-size: 3rem;
+    position: absolute;
+    top: 30px;
+    left: 30px; 
+    filter: drop-shadow(0 0 10px rgba(213, 162, 111, 0.7));
+    z-index: 5;
+    animation: pulseGlow 2s infinite alternate;
+}
+
+@keyframes pulseGlow {
+    0% { filter: drop-shadow(0 0 5px rgba(213, 162, 111, 0.5)); }
+    100% { filter: drop-shadow(0 0 15px rgba(213, 162, 111, 0.9)); }
+}
+
+.warrior-icon.bhima {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 2.5rem;
+    z-index: 4;
+}
+
+.army-formation {
+    position: absolute;
+    display: flex;
+    gap: 15px;
+    font-size: 1.5rem;
+}
+
+.army-formation.pandava {
+    bottom: 30px;
+    left: 20px;
+    transform: translateX(0);
+    animation: moveRight 4s infinite alternate ease-in-out;
+}
+
+.army-formation.kaurava {
+    bottom: 30px;
+    right: 20px;
+}
+
+@keyframes moveRight {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(40px); }
+}
+
+/* Fix warrior tab layout */
+.warrior-tab {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    padding: 1.5rem 2.5rem;
+    background: rgba(46, 26, 20, 0.5);
+    border: 1px solid rgba(213, 162, 111, 0.4);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.warrior-tab:hover, .warrior-tab.active {
+    background: linear-gradient(135deg, rgba(102, 36, 23, 0.8), rgba(46, 26, 20, 0.9));
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+}
+
+.warrior-tab .warrior-icon {
+    position: static !important; 
+    display: block;
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+}
+
+.warrior-tab .warrior-name {
+    position: static !important;
+    font-family: 'Cinzel', serif;
+    font-size: 1.2rem;
+    color: #d5a26f;
+    text-align: center;
+    display: block;
+    margin-top: 0.5rem;
+}
+
+/* Make sure these z-index settings are in your day2.css */
+.blood-drip-container, 
+.blood-spatter-container,
+.blood-pulse {
+    z-index: 5; /* Lower z-index */
+}
+
+.content-section,
+#battlefield-analytics-section,
+#battlefield-analytics-container {
+    position: relative;
+    z-index: 10; /* Higher z-index than blood effects */
+}
+
+.war-dashboard {
+    position: relative;
+    z-index: 15; /* Even higher z-index */
+}
+
+.toggle-nav,
+.toggle-btn {
+    position: relative;
+    z-index: 20; /* Highest z-index to ensure they're clickable */
+}

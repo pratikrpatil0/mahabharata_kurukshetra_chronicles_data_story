@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="day2_2.css">
+</head>
+<body>
+    <div class="combat-dashboard">
+        <div class="dashboard-header">
+            <div class="header-icon">🔶</div>
+            <h2>Combat Statistics & Weapon Usage</h2>
+        </div>
+        
+        <div class="visualization-container">
+            <!-- Toggle Navigation -->
+            <div class="toggle-controls">
+                <button class="toggle-btn active" data-view="chart">
+                    <span class="icon">📊</span>
+                    <span>Battle Charts</span>
+                </button>
+                <button class="toggle-btn" data-view="comparison">
+                    <span class="icon">⚔️</span>
+                    <span>Weapon Comparison</span>
+                </button>
+                <button class="toggle-btn" data-view="impact">
+                    <span class="icon">💥</span>
+                    <span>Battle Impact</span>
+                </button>
+            </div>
+            
+            <!-- Main Chart View -->
+            <div id="chart-view" class="dashboard-view active">
+                <div class="chart-container">
+                    <canvas id="combat-chart"></canvas>
+                </div>
+                <div class="chart-legend">
+                    <div class="legend-item">
+                        <div class="legend-icon">🏹</div>
+                        <div class="legend-label">Arrows</div>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-icon">🗡️</div>
+                        <div class="legend-label">Swords</div>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-icon">🔱</div>
+                        <div class="legend-label">Spears</div>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-icon">🪓</div>
+                        <div class="legend-label">Maces</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Weapon Comparison View -->
+            <div id="comparison-view" class="dashboard-view">
+                <div class="narrative-intro">
+                    <p>Day 2 witnessed strategic weapon deployment as Bhima and Arjuna's counter-offensive reshaped the battlefield. The Pandavas' tactical superiority began to emerge despite the Kaurava's numerical advantage.</p>
+                </div>
+                
+                <div class="comparison-grid">
+                    <div class="comparison-item" data-weapon="arrow">
+                        <div class="weapon-icon">🏹</div>
+                        <div class="weapon-name">Arrows</div>
+                        <div class="weapon-bar">
+                            <div class="weapon-progress" data-value="1500000"></div>
+                        </div>
+                        <div class="weapon-count">1.5 million+</div>
+                        <div class="weapon-story-trigger">View Analysis</div>
+                        <div class="weapon-story">
+                            <div class="story-close">×</div>
+                            <h4>Arrow Analytics</h4>
+                            <p>Bhishma alone fired <span class="highlight">1,000+ arrows per minute</span>, creating impenetrable projectile barriers. Kaurava archers achieved a <span class="highlight">3:1 arrow advantage</span> during peak combat hours.</p>
+                            <div class="story-stat">
+                                <div class="stat-label">Casualty Rate:</div>
+                                <div class="stat-value">42%</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="comparison-item" data-weapon="sword">
+                        <div class="weapon-icon">🗡️</div>
+                        <div class="weapon-name">Swords</div>
+                        <div class="weapon-bar">
+                        <div class="weapon-progress" data-value="420000"></div>
+                        </div>
+                        <div class="weapon-count">420,000+</div>
+                        <div class="weapon-story-trigger">View Analysis</div>
+                        <div class="weapon-story">
+                            <div class="story-close">×</div>
+                            <h4>Sword Analytics</h4>
+                            <p>Sword combatants engaged in <span class="highlight">close-quarters battle</span> after initial range attacks. Bhima's sword technique proved <span class="highlight">81% more effective</span> than average warriors.</p>
+                            <div class="story-stat">
+                                <div class="stat-label">Casualty Rate:</div>
+                                <div class="stat-value">65%</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="comparison-item" data-weapon="spear">
+                        <div class="weapon-icon">🔱</div>
+                        <div class="weapon-name">Spears</div>
+                        <div class="weapon-bar">
+                            <div class="weapon-progress" data-value="310000"></div>
+                        </div>
+                        <div class="weapon-count">310,000+</div>
+                        <div class="weapon-story-trigger">View Analysis</div>
+                        <div class="weapon-story">
+                            <div class="story-close">×</div>
+                            <h4>Spear Analytics</h4>
+                            <p>Spear formations created <span class="highlight">defensive barriers</span> against charging forces. Infantry with spears showed <span class="highlight">37% higher survival rates</span> against cavalry charges.</p>
+                            <div class="story-stat">
+                                <div class="stat-label">Casualty Rate:</div>
+                                <div class="stat-value">53%</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="comparison-item" data-weapon="mace">
+                        <div class="weapon-icon">🪓</div>
+                        <div class="weapon-name">Maces</div>
+                        <div class="weapon-bar">
+                            <div class="weapon-progress" data-value="120000"></div>
+                        </div>
+                        <div class="weapon-count">120,000+</div>
+                        <div class="weapon-story-trigger">View Analysis</div>
+                        <div class="weapon-story">
+                            <div class="story-close">×</div>
+                            <h4>Mace Analytics</h4>
+                            <p>Though fewer in number, maces delivered <span class="highlight">devastating impact</span>, with a single blow often fatal. Elite warriors with maces recorded <span class="highlight">4.7x higher kill ratios</span>.</p>
+                            <div class="story-stat">
+                                <div class="stat-label">Casualty Rate:</div>
+                                <div class="stat-value">89%</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="advanced-analytics">
+                    <h3 class="analytics-title">Weapon Effectiveness Analysis</h3>
+                    <div class="analytics-intro">
+                        <p>Each weapon's effectiveness varied dramatically across battlefield conditions, with trade-offs between range, lethality and skill required.</p>
+                    </div>
+                    <div class="radar-container">
+                        <canvas id="weapons-radar-chart"></canvas>
+                    </div>
+                    <div class="analytics-insight">
+                        <div class="insight-icon">💫</div>
+                        <div class="insight-content">
+                            <h4>Key Strategic Insight</h4>
+                            <p>The Kaurava advantage on Day 2 stemmed from optimal weapon deployment ratios: initiating with mass arrow volleys, followed by spear formations, with sword and mace warriors deployed at critical engagement points.</p>
+                            <div class="insight-data">
+                                <div class="data-point">
+                                    <div class="data-value">3.6x</div>
+                                    <div class="data-label">Kaurava arrow superiority</div>
+                                </div>
+                                <div class="data-point">
+                                    <div class="data-value">74%</div>
+                                    <div class="data-label">Pandava casualties</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Battle Impact View -->
+            <div id="impact-view" class="dashboard-view">
+                <div class="narrative-intro">
+                    <p>Day 2's battlefield witnessed unprecedented force deployments, reshaping traditional warfare dynamics as specialized units fought for positional advantages.</p>
+                </div>
+                
+                <div class="battle-metrics">
+                    <div class="metric-column">
+                        <div class="metric-number">74%</div>
+                        <div class="metric-label">Pandava Casualties</div>
+                    </div>
+                    <div class="metric-column">
+                        <div class="metric-number">26%</div>
+                        <div class="metric-label">Kaurava Casualties</div>
+                    </div>
+                    <div class="metric-column">
+                        <div class="metric-number">7.3</div>
+                        <div class="metric-label">Square Miles Contested</div>
+                    </div>
+                    <div class="metric-column">
+                        <div class="metric-number">6.2x</div>
+                        <div class="metric-label">Bhishma Force Multiplier</div>
+                    </div>
+                </div>
+                
+                <div class="impact-cards">
+                    <div class="impact-card">
+                        <div class="impact-icon">🐘</div>
+                        <div class="impact-title">Elephants</div>
+                        <div class="impact-count">45,000+</div>
+                        <div class="impact-meter">
+                            <div class="impact-fill" style="width: 95%;"></div>
+                        </div>
+                        <div class="impact-detail">Psychological impact rating: <span class="highlight">95%</span></div>
+                        <div class="impact-note">Each war elephant disrupted ~40 infantry</div>
+                    </div>
+                    <div class="impact-card">
+                        <div class="impact-icon">🛞</div>
+                        <div class="impact-title">Chariots</div>
+                        <div class="impact-count">120,000+</div>
+                        <div class="impact-meter">
+                            <div class="impact-fill" style="width: 80%;"></div>
+                        </div>
+                        <div class="impact-detail">Mobility advantage: <span class="highlight">80%</span></div>
+                        <div class="impact-note">Allowed rapid reinforcement of weak points</div>
+                    </div>
+                    <div class="impact-card">
+                        <div class="impact-icon">🐎</div>
+                        <div class="impact-title">Horses</div>
+                        <div class="impact-count">380,000+</div>
+                        <div class="impact-meter">
+                            <div class="impact-fill" style="width: 75%;"></div>
+                        </div>
+                        <div class="impact-detail">Flanking effectiveness: <span class="highlight">75%</span></div>
+                        <div class="impact-note">Critical for battlefield communication</div>
+                    </div>
+                    <div class="impact-card">
+                        <div class="impact-icon">👥</div>
+                        <div class="impact-title">Infantry</div>
+                        <div class="impact-count">2.2 million+</div>
+                        <div class="impact-meter">
+                            <div class="impact-fill" style="width: 60%;"></div>
+                        </div>
+                        <div class="impact-detail">Formation cohesion: <span class="highlight">60%</span></div>
+                        <div class="impact-note">Strength diminished under arrow barrages</div>
+                    </div>
+                </div>
+                
+                <div class="advanced-analytics">
+                    <h3 class="analytics-title">Unit Effectiveness Matrix</h3>
+                    <div class="analytics-intro">
+                        <p>This heatmap reveals the comparative effectiveness of different military units against each other during Day 3's engagements.</p>
+                    </div>
+                    <div class="matrix-container">
+                        <table class="heatmap-table">
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th><div class="table-icon">👥</div>Infantry</th>
+                                    <th><div class="table-icon">🐎</div>Cavalry</th>
+                                    <th><div class="table-icon">🛞</div>Chariots</th>
+                                    <th><div class="table-icon">🐘</div>Elephants</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="row-header"><div class="table-icon">👥</div>Infantry</td>
+                                    <td data-value="50" class="heatmap-cell"></td>
+                                    <td data-value="30" class="heatmap-cell"></td>
+                                    <td data-value="25" class="heatmap-cell"></td>
+                                    <td data-value="15" class="heatmap-cell"></td>
+                                </tr>
+                                <tr>
+                                    <td class="row-header"><div class="table-icon">🐎</div>Cavalry</td>
+                                    <td data-value="75" class="heatmap-cell"></td>
+                                    <td data-value="50" class="heatmap-cell"></td>
+                                    <td data-value="40" class="heatmap-cell"></td>
+                                    <td data-value="30" class="heatmap-cell"></td>
+                                </tr>
+                                <tr>
+                                    <td class="row-header"><div class="table-icon">🛞</div>Chariots</td>
+                                    <td data-value="85" class="heatmap-cell"></td>
+                                    <td data-value="60" class="heatmap-cell"></td>
+                                    <td data-value="50" class="heatmap-cell"></td>
+                                    <td data-value="45" class="heatmap-cell"></td>
+                                </tr>
+                                <tr>
+                                    <td class="row-header"><div class="table-icon">🐘</div>Elephants</td>
+                                    <td data-value="95" class="heatmap-cell"></td>
+                                    <td data-value="90" class="heatmap-cell"></td>
+                                    <td data-value="70" class="heatmap-cell"></td>
+                                    <td data-value="60" class="heatmap-cell"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="matrix-insights">
+                        <div class="insight-column">
+                            <h4><span class="highlight">95%</span> Effectiveness</h4>
+                            <p>Elephants against infantry represented the highest tactical advantage on the battlefield. Bhishma positioned elephant units to break through Pandava defensive lines.</p>
+                        </div>
+                        <div class="insight-column">
+                            <h4>Critical Finding</h4>
+                            <p>When comparing effectiveness ratios across all unit types, the Kauravas maintained a <span class="highlight">2.4:1 advantage</span> in optimal unit deployment on Day 3.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="dashboard-footer">
+            <div class="insight-box">
+                <div class="insight-icon">💡</div>
+                <div class="insight-text">Day 3 saw the highest density of arrows fired, with Bhishma alone releasing thousands of arrows per minute at the peak of battle.</div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="day2_2.js"></script>
+</body>
+</html>

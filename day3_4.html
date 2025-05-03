@@ -1,0 +1,76 @@
+<div class="casualty-dashboard">
+    <div class="dashboard-header">
+        <div class="header-icon">🩸</div>
+        <h2>Day 3 Casualties</h2>
+    </div>
+
+    <div class="view-selector">
+        <button class="view-tab active" data-view="visual">
+            <span class="tab-icon">📊</span>Loss Analysis
+        </button>
+        <button class="view-tab" data-view="reflection">
+            <span class="tab-icon">🕊️</span>Reflection
+        </button>
+    </div>
+
+    <div id="visual-view" class="dashboard-view active">
+        <div class="casualty-totals">
+            <div class="army-total pandava">
+                <h3>Pandavas</h3>
+                <div class="total-count">120,000</div>
+                <div class="loss-icon">⚔️</div>
+            </div>
+            <div class="vs-marker">vs</div>
+            <div class="army-total kaurava">
+                <h3>Kauravas</h3>
+                <div class="total-count">180,000</div>
+                <div class="loss-icon">⚔️</div>
+            </div>
+        </div>
+        
+        <div class="chart-container">
+            <canvas id="casualties-chart"></canvas>
+        </div>
+        
+        <div class="key-insights">
+            <div class="insight">
+                <div class="insight-value">60%</div>
+                <div class="insight-label">Kaurava Losses</div>
+            </div>
+            <div class="insight">
+                <div class="insight-value">40%</div>
+                <div class="insight-label">Pandava Losses</div>
+            </div>
+            <div class="insight">
+                <div class="insight-value">3:2</div>
+                <div class="insight-label">Loss Ratio</div>
+            </div>
+        </div>
+    </div>
+
+    <div id="reflection-view" class="dashboard-view">
+        <div class="reflection-container">
+            <div class="reflection-icon">🕯️</div>
+            <div class="reflection-content">
+                <h3>End of Day Reflection</h3>
+                <p>Day 3 witnessed intensified combat with significant casualties on both sides. The Pandavas showcased resilience, with Arjuna and Bhima playing pivotal roles in countering the Kaurava onslaught.</p>
+                <p>The psychological tactics employed, including Krishna's dramatic intervention, underscored the war's escalating intensity. As dusk settled, both armies recognized the mounting toll and braced for the challenges of the ensuing days.</p>
+            </div>
+        </div>
+        
+        <div class="day-highlights">
+            <div class="highlight">
+                <div class="highlight-icon">🏆</div>
+                <div class="highlight-text">Bhishma slayed over 50,000 warriors alone</div>
+            </div>
+            <div class="highlight">
+                <div class="highlight-icon">⚡</div>
+                <div class="highlight-text">Krishna nearly broke his vow not to fight</div>
+            </div>
+            <div class="highlight">
+                <div class="highlight-icon">🛡️</div>
+                <div class="highlight-text">Shikhandi emerged as Bhishma's potential weakness</div>
+            </div>
+        </div>
+    </div>
+</div>

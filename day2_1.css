@@ -1,0 +1,1086 @@
+/* Core Dashboard Styles */
+.war-dashboard {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1.5rem;
+    font-family: 'Cinzel', serif;
+    color: #f5e6cc;
+    background: linear-gradient(135deg, rgba(46, 26, 20, 0.8), rgba(102, 36, 23, 0.8));
+    border-radius: 10px;
+    border: 2px solid rgba(213, 162, 111, 0.7);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    position: relative;
+    z-index: 25; /* Ensure it stays above blood effects */
+}
+
+.dashboard-title {
+    text-align: center;
+    font-size: 2.2rem;
+    color: #d5a26f;
+    margin-bottom: 1.5rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+}
+
+/* Enhanced Toggle Buttons - Make sure they're clearly visible */
+.toggle-nav {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 2.5rem;
+    position: relative;
+    z-index: 30;
+    padding: 10px;
+    background: rgba(46, 26, 20, 0.3);
+    border-radius: 10px;
+    border: 1px dashed rgba(213, 162, 111, 0.4);
+}
+
+.toggle-btn {
+    padding: 1rem 1.5rem;
+    background: linear-gradient(135deg, rgba(46, 26, 20, 0.9), rgba(102, 36, 23, 0.8));
+    color: #d5a26f;
+    border: 1px solid rgba(213, 162, 111, 0.6);
+    border-radius: 5px;
+    font-family: 'Cinzel', serif;
+    font-weight: bold;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+.toggle-btn:hover {
+    background: linear-gradient(135deg, rgba(102, 36, 23, 0.9), rgba(46, 26, 20, 0.9));
+    transform: translateY(-3px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.5);
+}
+
+.toggle-btn.active {
+    background: linear-gradient(135deg, rgba(213, 162, 111, 0.4), rgba(213, 162, 111, 0.2));
+    border: 2px solid rgba(213, 162, 111, 0.9);
+    box-shadow: 0 2px 10px rgba(213, 162, 111, 0.5), inset 0 0 15px rgba(213, 162, 111, 0.3);
+    transform: translateY(1px);
+}
+
+.toggle-btn-icon {
+    font-size: 1.5rem;
+}
+
+/* Formations summary box */
+.formations-summary {
+    background: linear-gradient(135deg, rgba(46, 26, 20, 0.7), rgba(102, 36, 23, 0.6));
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    border: 1px solid rgba(213, 162, 111, 0.6);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.formations-title {
+    color: #d5a26f;
+    font-size: 1.6rem;
+    text-align: center;
+    margin-bottom: 1.5rem;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+.formations-content {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.formation-side {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.formation-name {
+    font-size: 1.2rem;
+    color: #d5a26f;
+    margin-bottom: 0.5rem;
+    text-align: center;
+}
+
+.formation-icon {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+.formation-illustration {
+    width: 100%;
+    height: 180px;
+    margin: 1rem 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.formation-commanders {
+    text-align: center;
+    margin-bottom: 0.5rem;
+    color: #f5e6cc;
+}
+
+.formation-strategy {
+    font-style: italic;
+    text-align: center;
+    padding: 0.5rem;
+    background: rgba(213, 162, 111, 0.1);
+    border-radius: 4px;
+    font-family: 'Cormorant Garamond', serif;
+    color: #f5e6cc;
+}
+
+/* Data Sections */
+.data-section {
+    opacity: 0;
+    display: none;
+    transition: opacity 0.3s ease;
+}
+
+.data-section.active {
+    opacity: 1;
+    display: block;
+}
+
+/* Overview Cards */
+.overview-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.overview-card {
+    background: linear-gradient(135deg, rgba(46, 26, 20, 0.7), rgba(102, 36, 23, 0.6));
+    border-radius: 8px;
+    padding: 1.5rem;
+    text-align: center;
+    border: 1px solid rgba(213, 162, 111, 0.4);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease;
+}
+
+.overview-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+}
+
+.overview-icon {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+    color: #d5a26f;
+}
+
+.overview-value {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #f5e6cc;
+    margin: 0.5rem 0;
+}
+
+.overview-label {
+    font-size: 1rem;
+    color: #d5a26f;
+}
+
+/* Casualty Total Box and Progress Bars */
+.casualties-total-box {
+    background: linear-gradient(135deg, rgba(46, 26, 20, 0.7), rgba(102, 36, 23, 0.6));
+    border-radius: 8px;
+    padding: 1.5rem;
+    text-align: center;
+    border: 1px solid rgba(213, 162, 111, 0.4);
+    margin-bottom: 1.5rem;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.casualties-total-icon {
+    font-size: 2.5rem;
+    color: #d5a26f;
+    margin-bottom: 0.5rem;
+}
+
+.casualties-total-title {
+    font-size: 1.4rem;
+    color: #f5e6cc;
+    margin-bottom: 0.5rem;
+}
+
+.casualties-total-value {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #d5a26f;
+    margin-bottom: 1.5rem;
+}
+
+.side-casualties-container {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+    margin-top: 1.5rem;
+}
+
+.side-casualties {
+    width: 45%;
+    text-align: center;
+}
+
+.side-casualties-title {
+    font-size: 1.2rem;
+    color: #d5a26f;
+    margin-bottom: 0.3rem;
+}
+
+.side-casualties-value {
+    font-size: 1.6rem;
+    color: #f5e6cc;
+    font-weight: bold;
+    margin-bottom: 0.8rem;
+}
+
+.side-casualties-bar-container {
+    height: 24px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 12px;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(213, 162, 111, 0.3);
+}
+
+.side-casualties-bar {
+    height: 100%;
+    width: 0%; /* Start at 0% - will be set by JS */
+    transition: width 1.5s ease-out;
+    border-radius: 12px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    display: block;
+}
+
+.pandava-bar {
+    background: linear-gradient(to right, rgba(75, 156, 211, 0.3), rgba(75, 156, 211, 0.7));
+}
+
+.kaurava-bar {
+    background: linear-gradient(to right, rgba(201, 76, 76, 0.3), rgba(201, 76, 76, 0.7));
+}
+
+.side-casualties-percent {
+    position: absolute;
+    right: 10px;
+    top: 0;
+    line-height: 24px;
+    color: #f5e6cc;
+    font-weight: bold;
+}
+
+/* Special Strategy Box */
+.special-strategy-box {
+    text-align: center;
+    padding: 20px;
+    border-radius: 8px;
+    background: linear-gradient(rgba(213, 162, 111, 0.2), rgba(102, 36, 23, 0.2));
+    border: 1px solid rgba(213, 162, 111, 0.4);
+}
+
+.special-strategy-title {
+    font-size: 1.4rem;
+    color: #d5a26f;
+    margin-bottom: 15px;
+}
+
+.special-strategy-highlight {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.strategy-icon {
+    font-size: 2rem;
+    margin-right: 15px;
+}
+
+.strategy-info {
+    text-align: left;
+}
+
+.strategy-name {
+    font-size: 1.2rem;
+    color: #f5e6cc;
+    margin-bottom: 5px;
+}
+
+.strategy-target {
+    font-size: 0.9rem;
+    color: #d5a26f;
+}
+
+.strategy-description {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    color: #f5e6cc;
+    font-size: 1.1rem;
+    max-width: 800px;
+    margin: 0 auto;
+    line-height: 1.5;
+}
+
+/* Formation Comparison */
+.formation-display {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+    margin-bottom: 1.5rem;
+}
+
+.formation-card {
+    background: linear-gradient(135deg, rgba(46, 26, 20, 0.7), rgba(102, 36, 23, 0.6));
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid rgba(213, 162, 111, 0.4);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.formation-header {
+    background: rgba(46, 26, 20, 0.8);
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    border-bottom: 1px solid rgba(213, 162, 111, 0.3);
+}
+
+.formation-icon {
+    font-size: 1.5rem;
+    color: #d5a26f;
+}
+
+.formation-title {
+    font-size: 1.3rem;
+    color: #d5a26f;
+    margin: 0;
+}
+
+.formation-content {
+    padding: 1.5rem;
+}
+
+.formation-name {
+    font-size: 1.5rem;
+    color: #f5e6cc;
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.formation-image {
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.formation-svg {
+    width: 100%;
+    height: 100%;
+}
+
+.formation-desc {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    color: #f5e6cc;
+    text-align: center;
+}
+
+.commander-list {
+    margin-top: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.commander-badge {
+    background: rgba(213, 162, 111, 0.2);
+    border: 1px solid rgba(213, 162, 111, 0.5);
+    border-radius: 20px;
+    padding: 0.3rem 0.8rem;
+    font-size: 0.9rem;
+    color: #f5e6cc;
+}
+
+/* Strategic Analysis Box */
+.strategic-analysis-box {
+    background: linear-gradient(rgba(102, 36, 23, 0.6), rgba(46, 26, 20, 0.7));
+    border-radius: 8px;
+    padding: 20px;
+    margin-top: 20px;
+    border: 1px solid rgba(213, 162, 111, 0.5);
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+}
+
+.analysis-icon {
+    font-size: 2rem;
+    color: #d5a26f;
+    flex-shrink: 0;
+}
+
+.analysis-title {
+    font-size: 1.2rem;
+    color: #d5a26f;
+    margin-bottom: 5px;
+}
+
+.analysis-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    color: #f5e6cc;
+    line-height: 1.5;
+}
+
+/* Casualties Analysis */
+.casualties-container {
+    padding: 20px;
+    background: rgba(46, 26, 20, 0.3);
+    border-radius: 10px;
+    border: 1px solid rgba(213, 162, 111, 0.4);
+    margin-bottom: 20px;
+}
+
+.casualties-chart-container {
+    height: 280px; /* Reduced from 350px */
+    margin-bottom: 2rem;
+    background: linear-gradient(135deg, rgba(46, 26, 20, 0.7), rgba(102, 36, 23, 0.6));
+    border-radius: 8px;
+    padding: 20px;
+    border: 1px solid rgba(213, 162, 111, 0.5);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    overflow: hidden; /* Keep content inside */
+}
+
+.chart-bars-container {
+    height: 85%;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-around;
+    padding: 10px;
+}
+
+.chart-bar-column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 20%;
+    max-width: 80px; /* Limit width */
+}
+
+.chart-bar-stack {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    height: 200px; /* Reduced from 250px */
+}
+
+/* Ensure the casualty details fit properly */
+.casualties-details {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem; /* Reduced from 2rem */
+}
+
+.casualty-type {
+    padding: 1rem 0.5rem; /* Reduced padding */
+    min-height: 120px; /* Reduced from 150px */
+}
+
+.casualty-icon {
+    font-size: 2rem; /* Reduced from 2.5rem */
+    margin-bottom: 0.5rem; /* Reduced from 1rem */
+}
+
+.casualty-value {
+    font-size: 1.6rem; /* Reduced from 1.8rem */
+    margin: 0.3rem 0;
+}
+
+.casualty-label {
+    font-size: 1rem; /* Reduced from 1.1rem */
+}
+
+.total-percent {
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(213, 162, 111, 0.3);
+    text-align: center;
+}
+
+.percent-label {
+    font-size: 1.1rem;
+    color: #d5a26f;
+    margin-bottom: 0.7rem;
+}
+
+.percent-value {
+    font-size: 2.2rem;
+    color: #f5e6cc;
+    font-weight: bold;
+}
+
+/* Enhanced Battle Map Visualizations */
+.map-viz-controls {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.map-viz-btn {
+    padding: 0.8rem 1.2rem;
+    background: linear-gradient(135deg, rgba(46, 26, 20, 0.9), rgba(102, 36, 23, 0.8));
+    color: #d5a26f;
+    border: 1px solid rgba(213, 162, 111, 0.6);
+    border-radius: 5px;
+    font-family: 'Cinzel', serif;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.map-viz-btn:hover {
+    background: linear-gradient(135deg, rgba(102, 36, 23, 0.9), rgba(46, 26, 20, 0.9));
+    transform: translateY(-2px);
+}
+
+.map-viz-btn.active {
+    background: linear-gradient(135deg, rgba(213, 162, 111, 0.3), rgba(213, 162, 111, 0.1));
+    border: 1px solid rgba(213, 162, 111, 0.8);
+    box-shadow: 0 2px 10px rgba(213, 162, 111, 0.3);
+}
+
+.viz-btn-icon {
+    font-size: 1.2rem;
+}
+
+.battle-viz {
+    display: none;
+    height: 500px;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+.battle-viz.active {
+    display: block;
+    opacity: 1;
+    animation: fadeInScale 0.5s forwards;
+}
+
+/* Heat Map Visualization */
+.heat-map {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(rgba(46, 26, 20, 0.4), rgba(46, 26, 20, 0.6));
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.heat-region {
+    position: absolute;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255, 0, 0, 0.7) 0%, rgba(255, 165, 0, 0.5) 50%, rgba(255, 0, 0, 0) 100%);
+}
+
+.battle-line {
+    position: absolute;
+    height: 3px;
+    background-color: rgba(255, 255, 255, 0.3);
+    transform-origin: center left;
+}
+
+.kaurava-line {
+    top: 30%;
+    left: 20%;
+    width: 60%;
+    transform: rotate(-5deg);
+    background-color: rgba(201, 76, 76, 0.7);
+}
+
+.pandava-line {
+    top: 70%;
+    left: 20%;
+    width: 60%;
+    transform: rotate(5deg);
+    background-color: rgba(75, 156, 211, 0.7);
+}
+
+.heatmap-legend {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    background: rgba(46, 26, 20, 0.8);
+    border: 1px solid rgba(213, 162, 111, 0.5);
+    border-radius: 5px;
+    padding: 1rem;
+    width: 200px;
+}
+
+.legend-title {
+    color: #d5a26f;
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+    text-align: center;
+}
+
+.gradient-bar {
+    height: 15px;
+    width: 100%;
+    background: linear-gradient(to right, rgba(255, 255, 0, 0.7), rgba(255, 165, 0, 0.7), rgba(255, 0, 0, 0.7));
+    border-radius: 3px;
+    margin-bottom: 0.3rem;
+}
+
+.gradient-labels {
+    display: flex;
+    justify-content: space-between;
+    color: #f5e6cc;
+    font-size: 0.8rem;
+}
+
+.legend-note {
+    color: #d5a26f;
+    font-style: italic;
+    font-size: 0.8rem;
+    margin-top: 0.5rem;
+    text-align: center;
+}
+
+/* Timeline Visualization */
+.battle-timeline {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(rgba(46, 26, 20, 0.4), rgba(46, 26, 20, 0.6));
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.timeline-hours {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 5%;
+    position: relative;
+    height: 50px;
+}
+
+.hour-marker {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.hour-line {
+    width: 2px;
+    height: 15px;
+    background-color: rgba(213, 162, 111, 0.7);
+}
+
+.hour-label {
+    color: #d5a26f;
+    font-size: 0.9rem;
+    margin-top: 0.5rem;
+    white-space: nowrap;
+}
+
+.timeline-events {
+    position: relative;
+    height: 200px;
+    margin: 2rem 0;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+}
+
+.timeline-event {
+    position: absolute;
+    height: 40px;
+    background: rgba(46, 26, 20, 0.7);
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0 1rem;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+}
+
+.pandava-event {
+    top: 30px;
+    background: rgba(75, 156, 211, 0.3);
+    border: 1px solid rgba(75, 156, 211, 0.7);
+}
+
+.kaurava-event {
+    bottom: 30px;
+    background: rgba(201, 76, 76, 0.3);
+    border: 1px solid rgba(201, 76, 76, 0.7);
+}
+
+.event-icon {
+    font-size: 1.3rem;
+}
+
+.event-label {
+    font-size: 0.9rem;
+    color: #f5e6cc;
+}
+
+.intensity-graph {
+    height: 150px;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    padding: 1rem;
+}
+
+.intensity-graph svg {
+    width: 100%;
+    height: 100px;
+    overflow: visible;
+}
+
+.pandava-line {
+    stroke: rgba(75, 156, 211, 0.7);
+    stroke-width: 2;
+    fill: none;
+}
+
+.kaurava-line {
+    stroke: rgba(201, 76, 76, 0.7);
+    stroke-width: 2;
+    fill: none;
+}
+
+.graph-legend {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-top: 1rem;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.legend-color {
+    width: 15px;
+    height: 5px;
+    border-radius: 2px;
+}
+
+.pandava-color {
+    background-color: rgba(75, 156, 211, 0.7);
+}
+
+.kaurava-color {
+    background-color: rgba(201, 76, 76, 0.7);
+}
+
+/* Force Analysis Visualization */
+.force-analysis {
+    height: 100%;
+    padding: 1.5rem;
+    background: linear-gradient(135deg, rgba(46, 26, 20, 0.4), rgba(102, 36, 23, 0.4));
+    border-radius: 8px;
+    overflow-y: auto;
+}
+
+.force-comparison {
+    display: flex;
+    height: 100%;
+    gap: 2rem;
+}
+
+.pandava-forces, .kaurava-forces {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.force-title {
+    color: #d5a26f;
+    text-align: center;
+    margin-bottom: 1.5rem;
+    font-size: 1.3rem;
+}
+
+.force-divider {
+    width: 2px;
+    background: linear-gradient(to bottom, transparent, rgba(213, 162, 111, 0.7), transparent);
+}
+
+.force-metrics {
+    margin-bottom: 2rem;
+}
+
+.metric-group {
+    margin-bottom: 1rem;
+}
+
+.metric-label {
+    color: #f5e6cc;
+    margin-bottom: 0.3rem;
+    font-size: 0.9rem;
+}
+
+.metric-bar-container {
+    height: 15px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative;
+}
+
+.metric-bar {
+    height: 100%;
+    border-radius: 10px;
+}
+
+.pandava-bar {
+    background: linear-gradient(to right, rgba(75, 156, 211, 0.3), rgba(75, 156, 211, 0.7));
+}
+
+.kaurava-bar {
+    background: linear-gradient(to right, rgba(201, 76, 76, 0.3), rgba(201, 76, 76, 0.7));
+}
+
+.metric-value {
+    position: absolute;
+    right: 10px;
+    top: 0;
+    color: #f5e6cc;
+    font-size: 0.8rem;
+    line-height: 15px;
+}
+
+.commander-stats {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.commander-card {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.commander-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.commander-icon {
+    font-size: 2rem;
+}
+
+.commander-name {
+    color: #d5a26f;
+    font-size: 1.1rem;
+    margin-bottom: 0.3rem;
+}
+
+.commander-skill {
+    color: #f5e6cc;
+    font-size: 0.9rem;
+}
+
+/* Responsive design for new visualizations */
+@media screen and (max-width: 900px) {
+    .force-comparison {
+        flex-direction: column;
+        gap: 2rem;
+    }
+    
+    .force-divider {
+        width: 100%;
+        height: 2px;
+        background: linear-gradient(to right, transparent, rgba(213, 162, 111, 0.7), transparent);
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .map-viz-controls {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .timeline-event {
+        padding: 0 0.5rem;
+    }
+    
+    .event-label {
+        font-size: 0.7rem;
+    }
+}
+
+/* Donut Chart Visualization for Casualties */
+.casualties-donut-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.casualties-donut {
+    position: relative;
+    width: 220px;
+    height: 220px;
+    border-radius: 50%;
+    background: #1e100c;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
+}
+
+.donut-segment {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    clip: rect(0, 220px, 220px, 110px);
+}
+
+/* Kaurava segment (64%) */
+.kaurava-segment {
+    background-color: rgba(201, 76, 76, 0.8);
+    /* For 64%, rotate 230.4 degrees (64% of 360) */
+    transform: rotate(0deg);
+}
+
+.kaurava-segment::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    clip: rect(0, 110px, 220px, 0);
+    background-color: rgba(201, 76, 76, 0.8);
+    transform: rotate(230.4deg);
+}
+
+/* Pandava segment (36%) */
+.pandava-segment {
+    background-color: rgba(75, 156, 211, 0.8);
+    /* Start after Kaurava segment */
+    transform: rotate(230.4deg);
+}
+
+/* Center hole */
+.donut-hole {
+    position: absolute;
+    width: 60%;
+    height: 60%;
+    background: linear-gradient(135deg, rgba(46, 26, 20, 0.9), rgba(102, 36, 23, 0.8));
+    border-radius: 50%;
+    top: 20%;
+    left: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid rgba(213, 162, 111, 0.3);
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.donut-label {
+    color: #d5a26f;
+    font-size: 1.4rem;
+    font-weight: bold;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7);
+}
+
+/* Legend */
+.donut-legend {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+    width: 100%;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.legend-color {
+    width: 20px;
+    height: 20px;
+    border-radius: 4px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.pandava-color {
+    background-color: rgba(75, 156, 211, 0.8);
+}
+
+.kaurava-color {
+    background-color: rgba(201, 76, 76, 0.8);
+}
+
+.legend-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.legend-title {
+    color: #d5a26f;
+    font-size: 1rem;
+}
+
+.legend-value {
+    color: #f5e6cc;
+    font-size: 1.1rem;
+    font-weight: bold;
+}
+
+/* Responsive adjustments */
+@media screen and (max-width: 600px) {
+    .casualties-donut {
+        width: 180px;
+        height: 180px;
+    }
+    
+    .donut-segment {
+        clip: rect(0, 180px, 180px, 90px);
+    }
+    
+    .kaurava-segment::before {
+        clip: rect(0, 90px, 180px, 0);
+    }
+    
+    .donut-legend {
+        flex-direction: column;
+        gap: 1rem;
+    }
+}

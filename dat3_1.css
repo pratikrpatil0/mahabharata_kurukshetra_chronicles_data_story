@@ -1,0 +1,660 @@
+/* Day 3 Battlefield Dashboard Styles */
+.battlefield-dashboard {
+    max-width: 1200px;
+    margin: 2rem auto 4rem;
+    padding: 2rem;
+    background: linear-gradient(135deg, rgba(46, 26, 20, 0.7), rgba(102, 36, 23, 0.7));
+    border: 2px solid rgba(213, 162, 111, 0.6);
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    position: relative;
+    overflow: hidden;
+    animation: fadeIn 1s ease-out;
+}
+
+.dashboard-title {
+    font-family: 'Cinzel', serif;
+    font-size: 2.5rem;
+    color: #d5a26f;
+    text-align: center;
+    margin-bottom: 2rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+}
+
+/* Battle Stats Cards */
+.battle-stats-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-bottom: 2.5rem;
+}
+
+.battle-info-card {
+    background: linear-gradient(135deg, rgba(46, 26, 20, 0.9), rgba(102, 36, 23, 0.8));
+    border: 1px solid rgba(213, 162, 111, 0.6);
+    border-radius: 8px;
+    padding: 1.5rem;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    animation: fadeInUp 0.8s ease both;
+    animation-fill-mode: backwards;
+}
+
+.battle-info-card:nth-child(1) { animation-delay: 0.2s; }
+.battle-info-card:nth-child(2) { animation-delay: 0.4s; }
+.battle-info-card:nth-child(3) { animation-delay: 0.6s; }
+
+.battle-info-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+}
+
+.card-icon {
+    margin-bottom: 1rem;
+}
+
+.emoji-icon {
+    font-size: 2.5rem;
+    filter: drop-shadow(0 3px 5px rgba(0, 0, 0, 0.3));
+}
+
+.death-emoji {
+    animation: pulsate 2s infinite;
+}
+
+.card-content h3 {
+    font-family: 'Cinzel', serif;
+    font-size: 1.2rem;
+    color: #d5a26f;
+    margin-bottom: 0.5rem;
+}
+
+.data-value {
+    font-family: 'Cinzel', serif;
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: #f5e6cc;
+    margin: 0.5rem 0;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+.data-subtitle {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    color: #d5a26f;
+    font-size: 1rem;
+}
+
+/* Death Counter Container */
+.death-counter-container {
+    background: linear-gradient(135deg, rgba(46, 26, 20, 0.8), rgba(102, 36, 23, 0.7));
+    border: 2px solid rgba(213, 162, 111, 0.6);
+    border-radius: 10px;
+    padding: 2rem;
+    margin-bottom: 3rem;
+    text-align: center;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.4);
+    animation: fadeInUp 0.8s ease both;
+    animation-delay: 0.8s;
+}
+
+.counter-title {
+    font-family: 'Cinzel', serif;
+    font-size: 1.8rem;
+    color: #d5a26f;
+    margin: 0.5rem 0 1rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.counter-value {
+    font-family: 'Cinzel', serif;
+    font-size: 5rem;
+    font-weight: 900;
+    color: #f5e6cc;
+    margin-bottom: 1.5rem;
+    text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.7);
+}
+
+.counter-bar-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.counter-bar {
+    height: 40px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 20px;
+    overflow: hidden;
+    position: relative;
+    border: 1px solid rgba(213, 162, 111, 0.3);
+    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.5);
+}
+
+.pandava-bar::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 0;
+    background: linear-gradient(90deg, rgba(75, 156, 211, 0.7), rgba(75, 156, 211, 0.9));
+    border-radius: 20px;
+    transition: width 2s ease-in-out;
+}
+
+.kaurava-bar::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 0;
+    background: linear-gradient(90deg, rgba(201, 76, 76, 0.7), rgba(201, 76, 76, 0.9));
+    border-radius: 20px;
+    transition: width 2s ease-in-out;
+}
+
+.counter-label {
+    position: absolute;
+    top: 50%;
+    left: 60px;
+    transform: translateY(-50%);
+    font-family: 'Cinzel', serif;
+    color: #f5e6cc;
+    font-size: 1rem;
+    z-index: 1;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+}
+
+/* Battle Timeline */
+.battle-timeline-container {
+    margin-bottom: 3rem;
+    animation: fadeInUp 0.8s ease both;
+    animation-delay: 1s;
+}
+
+.section-subtitle {
+    font-family: 'Cinzel', serif;
+    font-size: 1.8rem;
+    color: #d5a26f;
+    text-align: center;
+    margin-bottom: 1.5rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.battle-timeline-card {
+    background: linear-gradient(135deg, rgba(46, 26, 20, 0.8), rgba(102, 36, 23, 0.7));
+    border: 1px solid rgba(213, 162, 111, 0.6);
+    border-radius: 8px;
+    padding: 2rem;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+}
+
+.battle-timeline {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0 0 2.5rem;
+    position: relative;
+}
+
+.timeline-marker {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    z-index: 2;
+}
+
+.time-icon {
+    font-size: 1.8rem;
+    margin-bottom: 0.3rem;
+    filter: drop-shadow(0 3px 5px rgba(0, 0, 0, 0.3));
+}
+
+.time-label {
+    font-family: 'Cinzel', serif;
+    font-size: 0.9rem;
+    color: #d5a26f;
+}
+
+.timeline-bar {
+    height: 4px;
+    background: linear-gradient(to right, rgba(75, 156, 211, 0.7), rgba(201, 76, 76, 0.7));
+    flex: 1;
+    margin: 0 1rem;
+    position: relative;
+    border-radius: 2px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.timeline-events-container {
+    position: relative;
+    height: 100px;
+    margin-top: 1rem;
+}
+
+.timeline-event {
+    position: absolute;
+    top: 0;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: all 0.3s ease;
+}
+
+.event-time {
+    font-family: 'Cinzel', serif;
+    font-size: 0.9rem;
+    color: #d5a26f;
+    margin-bottom: 0.5rem;
+}
+
+.event-icon {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+    background: rgba(46, 26, 20, 0.7);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #d5a26f;
+    box-shadow: 0 0 10px rgba(213, 162, 111, 0.5);
+}
+
+.event-label {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.9rem;
+    color: #f5e6cc;
+    text-align: center;
+    max-width: 120px;
+}
+
+.timeline-event:hover {
+    transform: translateX(-50%) translateY(-5px);
+}
+
+/* Formations Section */
+.formations-container {
+    margin-bottom: 3rem;
+    animation: fadeInUp 0.8s ease both;
+    animation-delay: 1.2s;
+}
+
+.formation-cards {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+}
+
+.formation-card {
+    background: linear-gradient(135deg, rgba(46, 26, 20, 0.8), rgba(102, 36, 23, 0.7));
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+    transition: transform 0.3s ease;
+}
+
+.pandava-formation {
+    border: 2px solid rgba(75, 156, 211, 0.6);
+}
+
+.kaurava-formation {
+    border: 2px solid rgba(201, 76, 76, 0.6);
+}
+
+.formation-card:hover {
+    transform: translateY(-5px);
+}
+
+.formation-header {
+    padding: 1rem;
+    background: rgba(46, 26, 20, 0.8);
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    border-bottom: 1px solid rgba(213, 162, 111, 0.4);
+}
+
+.formation-icon {
+    font-size: 1.5rem;
+}
+
+.formation-header h4 {
+    font-family: 'Cinzel', serif;
+    font-size: 1.2rem;
+    color: #d5a26f;
+    margin: 0;
+}
+
+.formation-name {
+    font-family: 'Cinzel', serif;
+    font-size: 1.5rem;
+    color: #f5e6cc;
+    text-align: center;
+    padding: 1rem 0;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.formation-image {
+    padding: 1.5rem;
+    height: 250px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.formation-svg {
+    width: 100%;
+    height: 100%;
+}
+
+.formation-description {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    color: #f5e6cc;
+    padding: 0 1.5rem 1.5rem;
+    text-align: center;
+    font-style: italic;
+}
+
+/* Bhishma's Metrics */
+.bhishma-metrics {
+    margin-bottom: 3rem;
+    animation: fadeInUp 0.8s ease both;
+    animation-delay: 1.4s;
+}
+
+.metrics-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.metric-card {
+    background: linear-gradient(135deg, rgba(46, 26, 20, 0.8), rgba(102, 36, 23, 0.7));
+    border: 1px solid rgba(213, 162, 111, 0.6);
+    border-radius: 8px;
+    padding: 1.5rem;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease;
+}
+
+.metric-card:hover {
+    transform: translateY(-5px);
+}
+
+.metric-icon {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.metric-value {
+    font-family: 'Cinzel', serif;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #f5e6cc;
+    margin: 0.5rem 0;
+}
+
+.metric-label {
+    font-family: 'Cinzel', serif;
+    font-size: 1rem;
+    color: #d5a26f;
+}
+
+.bhishma-heatmap-container {
+    background: linear-gradient(135deg, rgba(46, 26, 20, 0.8), rgba(102, 36, 23, 0.7));
+    border: 1px solid rgba(213, 162, 111, 0.6);
+    border-radius: 8px;
+    padding: 1.5rem;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.heatmap-title {
+    font-family: 'Cinzel', serif;
+    font-size: 1.3rem;
+    color: #d5a26f;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.heatmap {
+    height: 300px;
+    border: 1px solid rgba(213, 162, 111, 0.3);
+    border-radius: 8px;
+    overflow: hidden;
+    background: rgba(46, 26, 20, 0.5);
+}
+
+/* Casualty Analysis */
+.casualty-analysis {
+    margin-bottom: 3rem;
+    animation: fadeInUp 0.8s ease both;
+    animation-delay: 1.6s;
+}
+
+.chart-container {
+    background: linear-gradient(135deg, rgba(46, 26, 20, 0.8), rgba(102, 36, 23, 0.7));
+    border: 1px solid rgba(213, 162, 111, 0.6);
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    height: 300px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.casualty-cards {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+}
+
+.casualty-card {
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+.pandava-card {
+    background: linear-gradient(135deg, rgba(46, 26, 20, 0.8), rgba(75, 156, 211, 0.2));
+    border: 1px solid rgba(75, 156, 211, 0.6);
+}
+
+.kaurava-card {
+    background: linear-gradient(135deg, rgba(46, 26, 20, 0.8), rgba(201, 76, 76, 0.2));
+    border: 1px solid rgba(201, 76, 76, 0.6);
+}
+
+.card-header {
+    background: rgba(46, 26, 20, 0.7);
+    padding: 1rem;
+    border-bottom: 1px solid rgba(213, 162, 111, 0.4);
+}
+
+.card-header h4 {
+    font-family: 'Cinzel', serif;
+    font-size: 1.2rem;
+    color: #d5a26f;
+    margin: 0;
+    text-align: center;
+}
+
+.card-content {
+    padding: 1.5rem;
+}
+
+.casualty-breakdown {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+}
+
+.casualty-type {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.casualty-label {
+    font-family: 'Cinzel', serif;
+    font-size: 0.9rem;
+    color: #d5a26f;
+    margin-bottom: 0.5rem;
+}
+
+.casualty-value {
+    font-family: 'Cinzel', serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #f5e6cc;
+}
+
+/* Battlefield Map */
+.battlefield-map-container {
+    margin-bottom: 3rem;
+    animation: fadeInUp 0.8s ease both;
+    animation-delay: 1.8s;
+}
+
+.battlefield-map {
+    background: linear-gradient(135deg, rgba(46, 26, 20, 0.8), rgba(102, 36, 23, 0.7));
+    border: 2px solid rgba(213, 162, 111, 0.6);
+    border-radius: 8px;
+    padding: 1.5rem;
+    position: relative;
+    height: 400px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+}
+
+.map-legend {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-top: 1rem;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.legend-color {
+    width: 20px;
+    height: 20px;
+    border-radius: 3px;
+    display: inline-block;
+}
+
+.legend-label {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.9rem;
+    color: #f5e6cc;
+}
+
+/* Key Insight Card */
+.key-insight-card {
+    background: linear-gradient(135deg, rgba(102, 36, 23, 0.8), rgba(46, 26, 20, 0.9));
+    border: 2px solid rgba(213, 162, 111, 0.7);
+    border-radius: 10px;
+    padding: 2rem;
+    text-align: center;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+    animation: fadeInUp 0.8s ease both;
+    animation-delay: 2s;
+}
+
+.insight-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    animation: pulsate 3s infinite;
+}
+
+.insight-title {
+    font-family: 'Cinzel', serif;
+    font-size: 1.8rem;
+    color: #d5a26f;
+    margin-bottom: 1rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.insight-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem;
+    color: #f5e6cc;
+    max-width: 800px;
+    margin: 0 auto;
+    line-height: 1.6;
+    font-style: italic;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes pulsate {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.1); opacity: 0.9; }
+}
+
+/* Responsive */
+@media screen and (max-width: 1024px) {
+    .battle-stats-container,
+    .metrics-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .formation-cards,
+    .casualty-cards {
+        grid-template-columns: 1fr;
+    }
+    
+    .casualty-breakdown {
+        grid-template-columns: 1fr 1fr;
+    }
+    
+    .dashboard-title {
+        font-size: 2rem;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .battle-stats-container,
+    .metrics-container {
+        grid-template-columns: 1fr;
+    }
+    
+    .data-value {
+        font-size: 1.8rem;
+    }
+    
+    .counter-value {
+        font-size: 3.5rem;
+    }
+}

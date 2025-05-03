@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trailer of the Kurukshetra Battle | Kurukshetra Chronicles</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Cormorant+Garamond:ital,wght@1,400;1,600&family=Marcellus&display=swap" rel="stylesheet">
+    <style>
+        /* Reset and base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            height: 100%;
+            overflow-x: hidden;
+            font-family: 'Cinzel', serif;
+            background: linear-gradient(to bottom, #2e1a14, #662417, #8c6239);
+            color: #f5e6cc;
+        }
+
+        /* Ancient texture overlay */
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://www.transparenttextures.com/patterns/old-wall.png');
+            opacity: 0.3;
+            z-index: -1;
+        }
+
+        /* Blood overlay and vignette effects */
+        .blood-overlay, .vignette {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .blood-overlay {
+            background: radial-gradient(circle, transparent 50%, rgba(102, 36, 23, 0.4) 100%);
+            z-index: 2;
+        }
+
+        .vignette {
+            box-shadow: inset 0 0 200px rgba(30, 10, 5, 0.8);
+            z-index: 3;
+        }
+        
+        /* BLOOD DRIP ANIMATIONS */
+        .blood-drip-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 4;
+            pointer-events: none;
+            overflow: hidden;
+        }
+        
+        .blood-drip {
+            position: absolute;
+            width: 4px;
+            background: linear-gradient(to bottom, #880000, #620000);
+            opacity: 0;
+            box-shadow: 0 0 8px rgba(136, 0, 0, 0.6);
+            transform-origin: top center;
+            border-radius: 0 0 2px 2px;
+            top: 0;
+            height: 0;
+            transform: scaleY(1);
+            will-change: height, opacity;
+        }
+        
+        /* Position the drips */
+        .blood-drip:nth-child(1) { left: 10%; animation: fullBloodDrip 20s infinite; animation-delay: 1s; }
+        .blood-drip:nth-child(2) { left: 25%; animation: fullBloodDrip 22s infinite; animation-delay: 4s; }
+        .blood-drip:nth-child(3) { left: 40%; animation: fullBloodDrip 18s infinite; animation-delay: 2s; }
+        .blood-drip:nth-child(4) { left: 55%; animation: fullBloodDrip 24s infinite; animation-delay: 5s; }
+        .blood-drip:nth-child(5) { left: 70%; animation: fullBloodDrip 21s infinite; animation-delay: 3s; }
+        .blood-drip:nth-child(6) { left: 85%; animation: fullBloodDrip 23s infinite; animation-delay: 0s; }
+        .blood-drip:nth-child(7) { left: 32%; animation: fullBloodDrip 25s infinite; animation-delay: 6s; }
+        .blood-drip:nth-child(8) { left: 78%; animation: fullBloodDrip 19s infinite; animation-delay: 7s; }
+        .blood-drip:nth-child(9) { left: 5%; animation: fullBloodDrip 21s infinite; animation-delay: 8s; }
+        .blood-drip:nth-child(10) { left: 17%; animation: fullBloodDrip 23s infinite; animation-delay: 2.5s; }
+        .blood-drip:nth-child(11) { left: 63%; animation: fullBloodDrip 20s infinite; animation-delay: 9s; }
+        .blood-drip:nth-child(12) { left: 92%; animation: fullBloodDrip 24s infinite; animation-delay: 4.5s; }
+        
+        /* Blood drops/splashes along the drips */
+        .blood-drip::after {
+            content: '';
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            background: #880000;
+            border-radius: 50%;
+            left: -1px;
+            opacity: 0;
+            box-shadow: 0 0 5px rgba(136, 0, 0, 0.6);
+        }
+
+        .blood-drip:nth-child(odd)::after {
+            top: 30%;
+            animation: dropSplash 19s infinite;
+            animation-delay: inherit;
+        }
+
+        .blood-drip:nth-child(even)::after {
+            top: 70%;
+            animation: dropSplash 17s infinite;
+            animation-delay: calc(inherit + 2s);
+        }
+
+        /* Blood spatter effects */
+        .blood-spatter-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 4;
+            pointer-events: none;
+            overflow: hidden;
+        }
+        
+        .blood-spatter {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-image: radial-gradient(circle, #880000 1px, transparent 1px),
+                             radial-gradient(circle, #880000 2px, transparent 2px),
+                             radial-gradient(circle, #880000 1px, transparent 1px),
+                             radial-gradient(circle, #880000 3px, transparent 3px);
+            background-size: 300px 300px;
+            background-position: 0 0, 100px 50px, 200px 150px, 60px 180px;
+            opacity: 0;
+            animation: bloodSpatter 15s infinite;
+            animation-delay: 5s;
+        }
+        
+        /* Blood pulse effect */
+        .blood-pulse {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(136, 0, 0, 0);
+            z-index: 5;
+            pointer-events: none;
+            animation: bloodPulse 15s infinite;
+        }
+        
+        /* Animation keyframes */
+        @keyframes fullBloodDrip {
+            0%, 95%, 100% { opacity: 0; height: 0; }
+            1%, 3% { opacity: 0.9; height: 0; }
+            10% { opacity: 0.9; height: 100vh; }
+            40% { opacity: 0.9; height: 100vh; }
+            70% { opacity: 0; height: 100vh; }
+        }
+        
+        @keyframes bloodSpatter {
+            0%, 85%, 100% { opacity: 0; }
+            1%, 5% { opacity: 0.7; }
+            25% { opacity: 0.5; }
+            50% { opacity: 0; }
+        }
+        
+        @keyframes bloodPulse {
+            0%, 85%, 100% { background-color: rgba(136, 0, 0, 0); }
+            86%, 88% { background-color: rgba(136, 0, 0, 0.3); }
+            90% { background-color: rgba(136, 0, 0, 0); }
+        }
+        
+        @keyframes dropSplash {
+            0%, 97%, 100% { opacity: 0; transform: translate(0, 0); }
+            98% { opacity: 1; transform: translate(1px, 0) scale(1.5); }
+            99% { opacity: 0; transform: translate(2px, 3px) scale(1); }
+        }
+
+        /* NAVIGATION BAR STYLES */
+        .navbar {
+            background-color: rgba(46, 26, 20, 0.95);
+            color: #d5a26f;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding: 8px 40px 8px 150px;
+            border-bottom: 1px solid #662417;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 990;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+            height: 50px;
+        }
+
+        /* Ribbon-style logo container */
+        .logo-container {
+            background: linear-gradient(to bottom, #8c6239, #662417);
+            position: fixed;
+            top: 0;
+            left: 20px;
+            z-index: 1000;
+            height: 120px;
+            width: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            clip-path: polygon(0% 0%, 100% 0%, 100% 70%, 50% 100%, 0% 70%);
+            filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.6));
+            border: 1px solid #d5a26f;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            text-decoration: none;
+        }
+
+        .logo-container:hover {
+            transform: scale(1.05);
+        }
+
+        /* Logo */
+        .logo {
+            height: 75px;
+            filter: brightness(1.2) drop-shadow(0 2px 3px rgba(0, 0, 0, 0.5));
+        }
+
+        /* Navigation links */
+        .nav-links {
+            display: flex;
+            gap: 25px;
+        }
+
+        .nav-links a {
+            color: #d5a26f;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 5px 0;
+            text-transform: uppercase;
+        }
+
+        .nav-links a:hover {
+            color: #f5e6cc;
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(to right, #8c6239, #d5a26f, #8c6239);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Intro Section with Title */
+        .intro-section {
+            text-align: center;
+            padding: 100px 20px 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .page-title {
+            font-size: 3.5rem;
+            color: #d5a26f;
+            margin-bottom: 1rem;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.7);
+        }
+
+        .page-subtitle {
+            font-size: 1.2rem;
+            color: #f5e6cc;
+            font-family: 'Marcellus', serif;
+            max-width: 700px;
+            margin: 0 auto;
+            opacity: 0.9;
+        }
+
+        /* Content Container */
+        .content-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Video Player Styling - YouTube-like with higher z-index */
+        .video-container {
+            position: relative;
+            width: 90%;
+            max-width: 1000px;
+            margin: 2rem auto 5rem;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.7);
+            border: 1px solid rgba(213, 162, 111, 0.5);
+            background-color: #000;
+            aspect-ratio: 16 / 9;
+            z-index: 10; /* Higher z-index to appear in front of blood animations */
+        }
+        
+        .trailer-video {
+            width: 100%;
+            height: 100%;
+            display: block;
+            cursor: pointer;
+            object-fit: cover;
+        }
+        
+        /* Remove footer */
+        footer {
+            display: none !important;
+        }
+
+        /* Responsive adjustments */a
+        @media screen and (max-width: 768px) {
+            .page-title {
+                font-size: 2.5rem;
+            }
+            
+            .video-container {
+                width: 95%;
+            }
+            
+            .control-btn {
+                font-size: 1.2rem;
+                padding: 0 10px;
+            }
+            
+            .time-display {
+                min-width: 80px;
+                font-size: 0.75rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Blood-like overlay for war theme -->
+    <div class="blood-overlay"></div>
+    
+    <!-- Vignette effect for aged, ancient look -->
+    <div class="vignette"></div>
+    
+    <!-- Enhanced Blood drips from top to bottom -->
+    <div class="blood-drip-container">
+        <div class="blood-drip"></div>
+        <div class="blood-drip"></div>
+        <div class="blood-drip"></div>
+        <div class="blood-drip"></div>
+        <div class="blood-drip"></div>
+        <div class="blood-drip"></div>
+        <div class="blood-drip"></div>
+        <div class="blood-drip"></div>
+        <div class="blood-drip"></div>
+        <div class="blood-drip"></div>
+        <div class="blood-drip"></div>
+        <div class="blood-drip"></div>
+    </div>
+    
+    <!-- Blood spatter (tiny dots) -->
+    <div class="blood-spatter-container">
+        <div class="blood-spatter"></div>
+    </div>
+    
+    <!-- Blood pulse effect -->
+    <div class="blood-pulse"></div>
+
+    <!-- Navigation bar -->
+    <a href="front.html" class="logo-container" id="logo-link">
+        <img src="kc.png" alt="Kurukshetra Chronicles" class="logo" />
+    </a>
+
+    <header class="navbar">
+        <nav class="nav-links">
+            <a href="trailer.html">Trailer</a>
+            <a href="#introduction">Introduction</a>
+            <a href="war_chronicles.html" id="chronicles-link">War Chronicles</a>
+            <a href="#conclusion">Conclusion</a>
+            <a href="#project">About Project</a>
+            <a href="#me">About Me</a>
+        </nav>
+    </header>
+
+    <!-- Intro Section with Title -->
+    <section class="intro-section">
+        <!-- Updated title for the trailer page -->
+        <h1 class="page-title">Trailer of the Kurukshetra Battle</h1>
+        <p class="page-subtitle">Witness the epic clash that changed the course of dharma forever</p>
+    </section>
+
+    <!-- Content Container -->
+    <div class="content-container">
+        <!-- Trailer Video Section -->
+        <section class="content-section" id="trailer-video">
+            <div class="video-container">
+                <iframe 
+                    width="100%" 
+                    height="100%" 
+                    src="https://www.youtube.com/embed/61ejo-xfVKY?si=JtoheDPVFw2I-xB2" 
+                    title="Kurukshetra Battle Trailer" 
+                    frameborder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                    allowfullscreen>
+                </iframe>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        // Animation for page load
+        document.addEventListener('DOMContentLoaded', function() {
+            // Play the KC symbol animation on page load - same as front page
+            const bloodDrips = document.querySelectorAll('.blood-drip');
+            
+            // Reset animations by removing and re-adding elements
+            bloodDrips.forEach(drip => {
+                const parent = drip.parentNode;
+                const clone = drip.cloneNode(true);
+                drip.remove();
+                setTimeout(() => {
+                    parent.appendChild(clone);
+                }, 10);
+            });
+            
+            // Also trigger blood spatter and pulse effects
+            const bloodSpatter = document.querySelector('.blood-spatter');
+            if (bloodSpatter) {
+                const spatterParent = bloodSpatter.parentNode;
+                const spatterClone = bloodSpatter.cloneNode(true);
+                bloodSpatter.remove();
+                setTimeout(() => {
+                    spatterParent.appendChild(spatterClone);
+                }, 10);
+            }
+            
+            // Add visible class to any elements that need to appear
+            setTimeout(() => {
+                document.body.classList.add('animation-played');
+            }, 100);
+        });
+    </script>
+</body>
+</html>
